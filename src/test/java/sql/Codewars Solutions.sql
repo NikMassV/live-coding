@@ -64,3 +64,16 @@ JOIN drugs d ON dr.drug_id = d.drug_id
 JOIN units u1 ON dr.drug_unit_id = u1.unit_id
 LEFT JOIN units u2 ON dr.check_unit_id = u2.unit_id
 ORDER BY d.drug_name ASC, dr.record_id ASC;
+
+------------------------------------------------------------------------------------------------------------------------
+
+--https://www.codewars.com/kata/6532433d49d3ef6435de1928/train/sql
+Find Messages with Multiple Occurrences of a Word "Apple"
+
+SELECT
+id,
+message,
+POSITION('apple' IN SUBSTRING(LOWER(message) FROM POSITION('apple' IN LOWER(message)) + 1)) + POSITION('apple' IN LOWER(message)) AS second_occurrence_position
+FROM messages
+WHERE LOWER(message) LIKE '%apple%apple%'
+ORDER BY id DESC;

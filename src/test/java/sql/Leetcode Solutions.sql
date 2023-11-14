@@ -22,3 +22,14 @@ END;
 $$ LANGUAGE plpgsql;
 
 ------------------------------------------------------------------------------------------------------------------------
+
+--https://leetcode.com/problems/rank-scores/submissions/
+Rank Scores
+
+SELECT
+s.score,
+count(unique_scores.score) as rank
+FROM scores s, (SELECT DISTINCT score FROM SCORES) unique_scores
+WHERE s.score <= unique_scores.score
+GROUP BY s.id, s.score
+ORDER BY s.score DESC;
