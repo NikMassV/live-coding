@@ -13,15 +13,15 @@ https://leetcode.com/problems/add-two-numbers/
 
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class AddTwoNumbers {
 
     @Test
     public void test() {
         ListNode l1 = new ListNode(2, new ListNode(4, new ListNode(3)));
         ListNode l2 = new ListNode(5, new ListNode(6, new ListNode(4)));
-//        ListNode expected = new ListNode(7, new ListNode(0, new ListNode(8)));
-        ListNode result = addTwoNumbers(l1, l2);
-        System.out.println(result);
+        assertThat(new ListNode(7, new ListNode(0, new ListNode(8)))).isEqualToComparingFieldByField(addTwoNumbers(l1, l2));
     }
 
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {

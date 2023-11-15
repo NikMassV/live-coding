@@ -2,11 +2,13 @@
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class ReverseInteger {
 
     @Test
     public void test() {
-        System.out.println(reverse(123));
+        assertEquals(321, reverse(123));
     }
 
     public int reverse(int x) {

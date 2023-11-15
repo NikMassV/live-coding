@@ -2,9 +2,15 @@
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class ExcelSheetColumnTitle {
 
     @Test
+    public void test() {
+        assertEquals("ABV", solution(750));
+    }
+
     public String solution(int columnNumber) {
         StringBuilder sb = new StringBuilder();
         while (columnNumber > 0) {

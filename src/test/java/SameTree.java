@@ -2,6 +2,8 @@
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class SameTree {
 
     @Test
@@ -15,8 +17,7 @@ public class SameTree {
         tree2.right = new TreeNode(3);
 
         // Test the isSameTree method
-        boolean result = isSameTree(tree1, tree2);
-        System.out.println("Are the trees the same? " + result);
+        assertTrue(isSameTree(tree1, tree2));
     }
 
     public boolean isSameTree(TreeNode p, TreeNode q) {

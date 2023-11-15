@@ -2,22 +2,15 @@
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class CountNumberOfHomogenousSubstrings {
 
     @Test
     public void test() {
-        String s0 = "bab";
-        int count0 = countHomogenous(s0);
-        System.out.println(count0);
-        String s1 = "abbcccaa";
-        int count1 = countHomogenous(s1);
-        System.out.println(count1); // Output: 13
-        String s2 = "xy";
-        int count2 = countHomogenous(s2);
-        System.out.println(count2); // Output: 2
-        String s3 = "zzzzz";
-        int count3 = countHomogenous(s3);
-        System.out.println(count3); // Output: 15
+        assertEquals(13, countHomogenous("abbcccaa"));
+        assertEquals(2, countHomogenous("xy"));
+        assertEquals(15, countHomogenous("zzzzz"));
     }
 
     public int countHomogenous(String s) {
