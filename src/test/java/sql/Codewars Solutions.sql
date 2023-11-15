@@ -1,8 +1,8 @@
 --https://www.codewars.com/kata/580918e24a85b05ad000010c
 
 SELECT
-p.id,
-p.name,
+    p.id,
+    p.name,
 COUNT(t.id) as toy_count
 FROM people p
 JOIN toys t on p.id = t.people_id
@@ -55,9 +55,9 @@ WITH intervals AS (
 Drug Dosages with Dual Unit Measurements
 
 SELECT
-dr.record_id,
-d.drug_name,
-dr.drug_amount,
+    dr.record_id,
+    d.drug_name,
+    dr.drug_amount,
 CASE WHEN u2.unit_name IS NULL THEN u1.unit_name ELSE CONCAT(u1.unit_name, '/', u2.unit_name) END AS dose_units
 FROM dose_records dr
 JOIN drugs d ON dr.drug_id = d.drug_id
@@ -70,10 +70,27 @@ ORDER BY d.drug_name ASC, dr.record_id ASC;
 --https://www.codewars.com/kata/6532433d49d3ef6435de1928/train/sql
 Find Messages with Multiple Occurrences of a Word "Apple"
 
+--The POSITION function is used to find the position of the first occurrence of "apple" in the message.
+--The SUBSTRING function is then used to extract the substring starting from the position after the first occurrence of "apple".
+--Another POSITION function is applied to find the position of the second occurrence of "apple" within the extracted substring.
+--The result of the second POSITION function is then adjusted by adding the position of the first occurrence to obtain the correct second_occurrence_position.
+
 SELECT
-id,
-message,
+    id,
+    message,
 POSITION('apple' IN SUBSTRING(LOWER(message) FROM POSITION('apple' IN LOWER(message)) + 1)) + POSITION('apple' IN LOWER(message)) AS second_occurrence_position
 FROM messages
 WHERE LOWER(message) LIKE '%apple%apple%'
 ORDER BY id DESC;
+
+------------------------------------------------------------------------------------------------------------------------
+
+--https://www.codewars.com/kata/650c5aa70b7009a1640c9596/train/sql
+Sibling Count based on Common Parent
+
+SELECT
+    cp1.client_id,
+    COUNT(DISTINCT cp2.client_id) AS num_siblings
+FROM client_parents cp1
+LEFT JOIN client_parents cp2 ON cp1.parent_id = cp2.parent_id AND cp1.client_id != cp2.client_id
+GROUP BY cp1.client_id;
