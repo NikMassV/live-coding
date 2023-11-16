@@ -24,7 +24,7 @@ public class AddTwoNumbers {
         assertThat(new ListNode(7, new ListNode(0, new ListNode(8)))).isEqualToComparingFieldByField(addTwoNumbers(l1, l2));
     }
 
-    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+    private ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode dummy = new ListNode();
         ListNode temp = dummy;
         int carry = 0;

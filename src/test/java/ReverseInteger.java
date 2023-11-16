@@ -11,7 +11,7 @@ public class ReverseInteger {
         assertEquals(321, reverse(123));
     }
 
-    public int reverse(int x) {
+    private int reverse(int x) {
         int result = 0;
         if (x > 2147483647) {
             return 0;

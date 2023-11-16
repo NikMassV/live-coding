@@ -11,7 +11,7 @@ public class ExcelSheetColumnTitle {
         assertEquals("ABV", solution(750));
     }
 
-    public String solution(int columnNumber) {
+    private String solution(int columnNumber) {
         StringBuilder sb = new StringBuilder();
         while (columnNumber > 0) {
             int remainder = (columnNumber - 1) % 26;

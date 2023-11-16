@@ -13,7 +13,7 @@ public class CountNumberOfHomogenousSubstrings {
         assertEquals(15, countHomogenous("zzzzz"));
     }
 
-    public int countHomogenous(String s) {
+    private int countHomogenous(String s) {
         int n = s.length();
         int count = 0;
         int mod = 1000000007;

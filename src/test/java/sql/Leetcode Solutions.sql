@@ -51,3 +51,15 @@ FROM ConsecutiveCounts
 WHERE Consecutivetimes >= 3;
 
 ------------------------------------------------------------------------------------------------------------------------
+
+//https://leetcode.com/problems/swap-salary/submissions/
+Swap Salary
+
+UPDATE Salary
+SET sex = CASE
+    WHEN sex = 'm' THEN 'f'
+    WHEN sex = 'f' THEN 'm'
+    ELSE sex
+END;
+
+------------------------------------------------------------------------------------------------------------------------
