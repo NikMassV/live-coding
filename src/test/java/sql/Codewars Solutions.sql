@@ -94,3 +94,31 @@ SELECT
 FROM client_parents cp1
 LEFT JOIN client_parents cp2 ON cp1.parent_id = cp2.parent_id AND cp1.client_id != cp2.client_id
 GROUP BY cp1.client_id;
+
+------------------------------------------------------------------------------------------------------------------------
+
+--https://www.codewars.com/kata/62b0da0e58e471000f28ce99/train/sql
+First Normal Form
+
+CREATE TABLE dishes (
+    restaurant_id INT,
+    dish VARCHAR(255),
+    FOREIGN KEY (restaurant_id) REFERENCES restaurants(id)
+);
+
+INSERT INTO dishes (restaurant_id, dish) VALUES
+    (1, 'Chicken Wings'),
+    (1, 'Chicken Strips'),
+    (2, 'Hamburger'),
+    (2, 'Cheeseburger'),
+    (2, 'Big Burger'),
+    (2, 'Chickenburger'),
+    (3, 'Coffee');
+
+INSERT INTO dishes (restaurant_id, dish)
+SELECT id, menu FROM restaurants;
+
+ALTER TABLE restaurants
+DROP COLUMN menu;
+
+------------------------------------------------------------------------------------------------------------------------
