@@ -67,3 +67,21 @@ SET sex = CASE WHEN sex = 'm' THEN 'f' ELSE 'm'
 END;
 
 ------------------------------------------------------------------------------------------------------------------------
+
+--https://leetcode.com/problems/department-highest-salary/submissions/
+Department Highest Salary
+
+SELECT
+  d.name AS Department,
+  e.name AS Employee,
+  e.salary AS Salary
+FROM Employee e
+JOIN Department d ON e.departmentId = d.id
+WHERE (e.departmentId, e.salary) IN
+    (SELECT
+      departmentId,
+      MAX(salary)
+     FROM Employee
+     GROUP BY departmentId);
+
+------------------------------------------------------------------------------------------------------------------------
