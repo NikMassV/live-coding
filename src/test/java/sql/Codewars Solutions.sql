@@ -122,3 +122,12 @@ ALTER TABLE restaurants
 DROP COLUMN menu;
 
 ------------------------------------------------------------------------------------------------------------------------
+
+--https://www.codewars.com/kata/6509e370597b85753f09b01f/train/sql
+Parameterized SQL: Section Access Control
+
+PREPARE find_sections(int) AS
+SELECT id, section_name
+FROM section_access
+WHERE $1 = ANY (string_to_array(user_access, ',')::int[])
+ORDER BY id;

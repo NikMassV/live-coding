@@ -85,3 +85,19 @@ WHERE (e.departmentId, e.salary) IN
      GROUP BY departmentId);
 
 ------------------------------------------------------------------------------------------------------------------------
+
+--https://leetcode.com/problems/managers-with-at-least-5-direct-reports/submissions/
+Managers with at Least 5 Direct Reports
+
+WITH count_reports AS (
+  SELECT
+    managerId,
+    COUNT(*) AS num_reports
+  FROM employee
+  GROUP BY managerId
+)
+SELECT
+  name
+FROM employee e
+JOIN count_reports cr ON e.id = cr.managerId
+WHERE cr.num_reports >= 5;
