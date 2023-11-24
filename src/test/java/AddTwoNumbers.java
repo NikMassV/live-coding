@@ -11,9 +11,10 @@ https://leetcode.com/problems/add-two-numbers/
         Return dummy’s next nod
  */
 
+import org.example.domain.ListNode;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AddTwoNumbers {
 
@@ -21,7 +22,9 @@ public class AddTwoNumbers {
     public void test() {
         ListNode l1 = new ListNode(2, new ListNode(4, new ListNode(3)));
         ListNode l2 = new ListNode(5, new ListNode(6, new ListNode(4)));
-        assertThat(new ListNode(7, new ListNode(0, new ListNode(8)))).isEqualToComparingFieldByField(addTwoNumbers(l1, l2));
+        ListNode expected = new ListNode(7, new ListNode(0, new ListNode(8)));
+        ListNode actual = addTwoNumbers(l1, l2);
+        assertEquals(expected, actual);
     }
 
     private ListNode addTwoNumbers(ListNode l1, ListNode l2) {
@@ -73,30 +76,5 @@ public class AddTwoNumbers {
             currentNode.next = new ListNode(dozenCarrier);
         }
         return result.next;
-    }
-
-    public class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode() {
-        }
-
-        ListNode(int val) {
-            this.val = val;
-        }
-
-        ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
-
-        @Override
-        public String toString() {
-            return "ListNode{" +
-                    "val=" + val +
-                    ", next=" + next +
-                    '}';
-        }
     }
 }

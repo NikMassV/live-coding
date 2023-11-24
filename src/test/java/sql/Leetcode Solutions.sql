@@ -101,3 +101,18 @@ SELECT
 FROM employee e
 JOIN count_reports cr ON e.id = cr.managerId
 WHERE cr.num_reports >= 5;
+
+________________________________________________________________________________________________________________________
+
+--https://leetcode.com/problems/investments-in-2016/description/
+Investments in 2016
+
+SELECT CAST(SUM(tiv_2016) AS NUMERIC(10, 2)) AS tiv_2016
+FROM (
+  SELECT
+    tiv_2016,
+    COUNT(*) OVER(PARTITION BY tiv_2015) AS cnt_of_same_tiv2015,
+    COUNT(*) OVER(PARTITION BY lat, lon) AS cnt_of_this_city
+    FROM insurance
+) as subquery
+WHERE cnt_of_same_tiv2015 > 1 AND cnt_of_this_city = 1;
