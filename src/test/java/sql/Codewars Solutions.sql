@@ -131,3 +131,17 @@ SELECT id, section_name
 FROM section_access
 WHERE $1 = ANY (string_to_array(user_access, ',')::int[])
 ORDER BY id;
+
+------------------------------------------------------------------------------------------------------------------------
+
+--https://www.codewars.com/kata/594633020a561e329a0000a2/train/sql
+Easy SQL: Counting and Grouping
+
+SELECT
+  race,
+  COUNT(race) AS count
+FROM
+demographics
+GROUP BY race
+ORDER BY count DESC;
+
