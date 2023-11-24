@@ -11,6 +11,8 @@ repositories {
 
 dependencies {
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.13.0'
+    implementation group: 'org.springframework', name: 'spring-context', version: '6.1.1'
+    implementation group: 'org.springframework', name: 'spring-tx', version: '6.1.1'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
     testImplementation 'org.assertj:assertj-core:3.4.1'
