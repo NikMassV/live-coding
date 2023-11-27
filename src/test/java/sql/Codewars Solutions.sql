@@ -145,3 +145,18 @@ demographics
 GROUP BY race
 ORDER BY count DESC;
 
+------------------------------------------------------------------------------------------------------------------------
+
+--https://www.codewars.com/kata/64de2c3a529cadf9db8c5f33/train/sql
+Top-Scoring Students for Each Subject
+
+SELECT
+    array_agg(s.student_name ORDER BY s.student_id ASC) AS student_names,
+    sub.subject_name,
+    MAX(m.mark_rate) AS mark_rate
+FROM marks m
+JOIN students s ON m.student_id = s.student_id
+JOIN subjects sub ON m.subject_id = sub.subject_id
+WHERE m.mark_rate = (SELECT MAX(mark_rate) FROM marks WHERE subject_id = m.subject_id)
+GROUP BY sub.subject_name;
+

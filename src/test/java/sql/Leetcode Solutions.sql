@@ -116,3 +116,16 @@ FROM (
     FROM insurance
 ) as subquery
 WHERE cnt_of_same_tiv2015 > 1 AND cnt_of_this_city = 1;
+
+------------------------------------------------------------------------------------------------------------------------
+
+--https://leetcode.com/problems/combine-two-tables/description/
+Combine Two Tables
+
+SELECT
+    p.firstName,
+    p.lastName,
+    a.city,
+    a.state
+FROM person p
+LEFT JOIN address a ON p.personId = a.personId;
