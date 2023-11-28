@@ -129,3 +129,23 @@ SELECT
     a.state
 FROM person p
 LEFT JOIN address a ON p.personId = a.personId;
+
+------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/employees-earning-more-than-their-managers/submissions/
+Employees Earning More Than Their Managers
+
+SELECT
+    e.name AS employee
+FROM employee e
+WHERE e.salary > (
+    SELECT
+        m.salary
+    FROM employee m
+    WHERE e.managerId = m.id
+);
+
+-- SELECT
+--     e.name AS employee
+-- FROM employee e
+-- JOIN employee m ON e.managerId = m.id
+-- WHERE e.salary > m.salary;
