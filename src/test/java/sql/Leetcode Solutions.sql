@@ -149,3 +149,21 @@ WHERE e.salary > (
 -- FROM employee e
 -- JOIN employee m ON e.managerId = m.id
 -- WHERE e.salary > m.salary;
+
+------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/duplicate-emails/submissions/
+Duplicate Emails
+
+SELECT
+  email
+FROM person
+GROUP BY email
+HAVING COUNT(email) > 1;
+
+-- SELECT DISTINCT ON (p1.email) p1.email
+-- FROM person p1
+-- JOIN person p2 ON p1.id <> p2.id AND p1.email = p2.email;
+
+-- SELECT DISTINCT ON (p1.email) p1.email
+-- FROM person p1, person p2
+-- WHERE p1.id <> p2.id AND p1.email = p2.email;
