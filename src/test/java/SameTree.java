@@ -1,5 +1,6 @@
 //https://leetcode.com/problems/same-tree/description/
 
+import org.example.domain.TreeNode;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -33,22 +34,4 @@ public class SameTree {
         return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
     }
 
-    public static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode() {
-        }
-
-        TreeNode(int val) {
-            this.val = val;
-        }
-
-        TreeNode(int val, TreeNode left, TreeNode right) {
-            this.val = val;
-            this.left = left;
-            this.right = right;
-        }
-    }
 }
