@@ -167,3 +167,18 @@ HAVING COUNT(email) > 1;
 -- SELECT DISTINCT ON (p1.email) p1.email
 -- FROM person p1, person p2
 -- WHERE p1.id <> p2.id AND p1.email = p2.email;
+
+------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/customers-who-never-order/description/
+Customers Who Never Order
+
+SELECT
+    c.name AS customers
+FROM customers c
+LEFT JOIN orders o ON c.id = o.customerId
+WHERE o.customerId IS NULL;
+
+-- SELECT
+--     c.name AS customers
+-- FROM customers c
+-- WHERE c.id NOT IN (SELECT o.customerId FROM orders o);
