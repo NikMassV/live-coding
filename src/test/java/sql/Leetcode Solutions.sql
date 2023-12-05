@@ -200,3 +200,11 @@ FROM weather w1
 JOIN weather w2 ON w1.recordDate-w2.recordDate=1 AND w1.temperature >w2.temperature;
 
 ------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/game-play-analysis-i/description/
+Game Play Analysis I
+
+SELECT
+    player_id,
+    MIN(event_date) AS first_login
+FROM activity
+GROUP BY player_id;
