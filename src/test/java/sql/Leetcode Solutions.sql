@@ -208,3 +208,14 @@ SELECT
     MIN(event_date) AS first_login
 FROM activity
 GROUP BY player_id;
+
+------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/employee-bonus/submissions/
+Employee Bonus
+
+SELECT
+    e.name,
+    b.bonus
+FROM employee e
+LEFT JOIN bonus b ON e.empId = b.empId
+WHERE b.bonus < 1000 OR b.bonus IS NULL;
