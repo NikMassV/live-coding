@@ -219,3 +219,14 @@ SELECT
 FROM employee e
 LEFT JOIN bonus b ON e.empId = b.empId
 WHERE b.bonus < 1000 OR b.bonus IS NULL;
+
+------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/find-customer-referee/description/
+Find Customer Referee
+
+SELECT
+    name
+FROM customer
+WHERE referee_id != 2 OR referee_id IS NULL;
+
+------------------------------------------------------------------------------------------------------------------------
