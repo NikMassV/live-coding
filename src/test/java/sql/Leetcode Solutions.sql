@@ -230,3 +230,25 @@ FROM customer
 WHERE referee_id != 2 OR referee_id IS NULL;
 
 ------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/customer-placing-the-largest-number-of-orders/submissions/
+Customer Placing the Largest Number of Orders
+
+SELECT
+    customer_number
+FROM orders
+GROUP BY customer_number
+ORDER BY COUNT(order_number) DESC
+LIMIT 1;
+
+WITH count_orders AS (
+    SELECT
+        customer_number,
+        COUNT(*) counts
+    FROM orders
+    GROUP BY customer_number
+)
+SELECT
+    customer_number
+FROM count_orders
+ORDER BY counts DESC
+LIMIT 1;
