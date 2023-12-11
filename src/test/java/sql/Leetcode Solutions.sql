@@ -252,3 +252,16 @@ SELECT
 FROM count_orders
 ORDER BY counts DESC
 LIMIT 1;
+
+------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/big-countries/submissions/
+Big Countries
+
+SELECT
+    name,
+    population,
+    area
+FROM world
+WHERE area >= 3000000 OR population >= 25000000;
+
+------------------------------------------------------------------------------------------------------------------------
