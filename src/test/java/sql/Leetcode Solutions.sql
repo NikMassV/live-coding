@@ -265,3 +265,11 @@ FROM world
 WHERE area >= 3000000 OR population >= 25000000;
 
 ------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/classes-more-than-5-students/submissions/
+Classes More Than 5 Students
+
+SELECT
+    class
+FROM courses
+GROUP BY class
+HAVING COUNT(student)>=5;
