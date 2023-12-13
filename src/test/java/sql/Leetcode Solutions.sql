@@ -273,3 +273,18 @@ SELECT
 FROM courses
 GROUP BY class
 HAVING COUNT(student)>=5;
+
+------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/sales-person/submissions/
+Sales Person
+
+SELECT
+    sp.name AS name
+FROM salesperson sp
+WHERE sp.sales_id NOT IN (
+    SELECT
+        o.sales_id
+    FROM orders o
+    JOIN company c ON o.com_id = c.com_id
+    WHERE c.name = 'RED'
+)
