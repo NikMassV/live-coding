@@ -288,3 +288,12 @@ WHERE sp.sales_id NOT IN (
     JOIN company c ON o.com_id = c.com_id
     WHERE c.name = 'RED'
 )
+
+------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/triangle-judgement/description/
+Triangle Judgement
+
+SELECT
+    *,
+    CASE WHEN x + y > z AND x + z > y AND y + z > x THEN 'Yes' ELSE 'No' END AS triangle
+FROM triangle;

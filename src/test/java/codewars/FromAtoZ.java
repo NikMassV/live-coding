@@ -13,7 +13,7 @@ public class FromAtoZ {
         assertEquals("a", gimmeTheLetters("a-a"));
     }
 
-    private String gimmeTheLetters(String s){
+    private String gimmeTheLetters(String s) {
         char start = s.charAt(0);
         char end = s.charAt(2);
         StringBuilder result = new StringBuilder();
