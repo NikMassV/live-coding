@@ -297,3 +297,19 @@ SELECT
     *,
     CASE WHEN x + y > z AND x + z > y AND y + z > x THEN 'Yes' ELSE 'No' END AS triangle
 FROM triangle;
+
+------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/biggest-single-number/
+Biggest Single Number
+
+SELECT
+    MAX(num) AS num
+FROM (
+    SELECT
+        num
+    FROM mynumbers
+    GROUP BY num
+    HAVING COUNT(num) = 1
+);
+
+------------------------------------------------------------------------------------------------------------------------
