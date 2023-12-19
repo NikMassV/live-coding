@@ -321,3 +321,16 @@ SELECT
 FROM cinema
 WHERE id % 2 = 1 AND description != 'boring'
 ORDER BY rating DESC
+
+------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/actors-and-directors-who-cooperated-at-least-three-times/description/
+Actors and Directors Who Cooperated At Least Three Times
+
+SELECT
+    actor_id,
+    director_id
+FROM actordirector
+GROUP BY actor_id, director_id
+HAVING COUNT(director_id) >= 3;
+
+------------------------------------------------------------------------------------------------------------------------
