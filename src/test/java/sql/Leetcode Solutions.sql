@@ -334,3 +334,13 @@ GROUP BY actor_id, director_id
 HAVING COUNT(director_id) >= 3;
 
 ------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/product-sales-analysis-i/description/
+Product Sales Analysis I
+
+SELECT
+    p.product_name,
+    s.year,
+    s.price
+FROM sales s
+JOIN product p ON s.product_id = p.product_id;
+------------------------------------------------------------------------------------------------------------------------
