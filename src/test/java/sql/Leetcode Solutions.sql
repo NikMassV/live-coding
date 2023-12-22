@@ -354,3 +354,15 @@ FROM project p
 JOIN employee e ON p.employee_id = e.employee_id
 GROUP BY p.project_id;
 ------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/sales-analysis-iii/description/
+Sales Analysis III
+
+SELECT
+    p.product_id,
+    p.product_name
+FROM product p
+RIGHT JOIN sales s ON p.product_id = s.product_id
+GROUP BY p.product_id, p.product_name
+HAVING MIN(s.sale_date) >= '2019-01-01' AND
+       MAX(s.sale_date) <= '2019-03-31'
+------------------------------------------------------------------------------------------------------------------------
