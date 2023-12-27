@@ -343,6 +343,7 @@ SELECT
     s.price
 FROM sales s
 JOIN product p ON s.product_id = p.product_id;
+
 ------------------------------------------------------------------------------------------------------------------------
 --https://leetcode.com/problems/project-employees-i/description/
 Project Employees I
@@ -353,6 +354,7 @@ SELECT
 FROM project p
 JOIN employee e ON p.employee_id = e.employee_id
 GROUP BY p.project_id;
+
 ------------------------------------------------------------------------------------------------------------------------
 --https://leetcode.com/problems/sales-analysis-iii/description/
 Sales Analysis III
@@ -365,4 +367,15 @@ RIGHT JOIN sales s ON p.product_id = s.product_id
 GROUP BY p.product_id, p.product_name
 HAVING MIN(s.sale_date) >= '2019-01-01' AND
        MAX(s.sale_date) <= '2019-03-31'
+
+------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/user-activity-for-the-past-30-days-i/description/
+User Activity for the Past 30 Days I
+
+SELECT
+    activity_date as day,
+    count(distinct user_id) as active_users
+FROM activity
+WHERE activity_date > Date '2019-07-27' - 30 AND activity_date <= '2019-07-27'
+GROUP BY day;
 ------------------------------------------------------------------------------------------------------------------------
