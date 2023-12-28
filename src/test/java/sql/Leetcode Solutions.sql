@@ -378,4 +378,15 @@ SELECT
 FROM activity
 WHERE activity_date > Date '2019-07-27' - 30 AND activity_date <= '2019-07-27'
 GROUP BY day;
+
+------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/article-views-i/description/
+Article Views I
+
+
+SELECT
+    DISTINCT ON (author_id) author_id as id
+FROM views
+WHERE author_id = viewer_id;
+
 ------------------------------------------------------------------------------------------------------------------------
