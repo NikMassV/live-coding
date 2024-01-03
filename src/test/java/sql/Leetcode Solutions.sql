@@ -410,3 +410,14 @@ FROM department
 GROUP BY id
 
 ------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/queries-quality-and-percentage/description/
+Queries Quality and Percentage
+
+SELECT
+    query_name,
+    ROUND((AVG(rating/position)), 2) as quality,
+    ROUND(SUM(CASE WHEN rating < 3 THEN 1 else 0 end) * 100 / COUNT(*), 2) as poor_query_percentage
+FROM queries
+GROUP BY query_name;
+
+------------------------------------------------------------------------------------------------------------------------
