@@ -418,6 +418,18 @@ SELECT
     ROUND((AVG(rating/position)), 2) as quality,
     ROUND(SUM(CASE WHEN rating < 3 THEN 1 else 0 end) * 100 / COUNT(*), 2) as poor_query_percentage
 FROM queries
+WHERE query_name IS NOT NULL
 GROUP BY query_name;
+
+------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/average-selling-price/
+Average Selling Price
+
+SELECT
+    p.product_id,
+    CASE WHEN SUM(us.units) IS NULL THEN 0 WHEN SUM(us.units) = 0 THEN 0 ELSE ROUND(SUM(p.price * us.units) / ROUND(SUM(us.units), 2), 2) END AS average_price
+FROM prices p
+LEFT JOIN unitsSold us ON p.product_id = us.product_id AND us.purchase_date BETWEEN p.start_date AND p.end_date
+GROUP BY p.product_id;
 
 ------------------------------------------------------------------------------------------------------------------------
