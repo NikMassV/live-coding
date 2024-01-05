@@ -433,3 +433,13 @@ LEFT JOIN unitsSold us ON p.product_id = us.product_id AND us.purchase_date BETW
 GROUP BY p.product_id;
 
 ------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/number-of-unique-subjects-taught-by-each-teacher/submissions/
+Number of Unique Subjects Taught by Each Teacher
+
+SELECT
+    teacher_id,
+    COUNT(DISTINCT subject_id) AS cnt
+FROM teacher
+GROUP BY teacher_id;
+
+------------------------------------------------------------------------------------------------------------------------
