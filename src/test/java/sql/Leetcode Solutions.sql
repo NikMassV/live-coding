@@ -1,3 +1,20 @@
+------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/game-play-analysis-iv/submissions/
+Game Play Analysis IV
+
+SELECT
+    ROUND(COUNT(a1.player_id) / ROUND(COUNT(a.player_id), 2), 2) AS fraction
+FROM activity a
+LEFT JOIN activity a1 ON a1.player_id = a.player_id AND a1.event_date = a.event_date + interval '1' day
+WHERE (a.player_id, a.event_date) IN (
+    SELECT
+        player_id,
+        MIN(event_date)
+    FROM activity
+    GROUP BY player_id
+)
+
+------------------------------------------------------------------------------------------------------------------------
 --https://leetcode.com/problems/second-highest-salary/submissions/
 Second Highest Salary
 
