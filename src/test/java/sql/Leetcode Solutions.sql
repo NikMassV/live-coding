@@ -1,4 +1,25 @@
 ------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/friend-requests-ii-who-has-the-most-friends/submissions/
+Friend Requests II: Who Has the Most Friends
+
+WITH ids AS (
+    SELECT
+        requester_id AS id
+    FROM requestAccepted
+    UNION ALL
+    SELECT
+        accepter_id AS id
+    FROM requestAccepted
+)
+SELECT
+    id,
+    COUNT(id) AS num
+FROM ids
+GROUP BY id
+ORDER BY num DESC
+LIMIT 1;
+
+------------------------------------------------------------------------------------------------------------------------
 --https://leetcode.com/problems/game-play-analysis-iv/submissions/
 Game Play Analysis IV
 
