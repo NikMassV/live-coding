@@ -1,4 +1,17 @@
 ------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/tree-node/description/
+Tree Node
+
+SELECT
+    id,
+    CASE
+        WHEN p_id IS NULL THEN 'Root'
+        WHEN id IN (SELECT DISTINCT p_id FROM tree) THEN 'Inner'
+        ELSE 'Leaf'
+    END AS type
+FROM tree;
+
+------------------------------------------------------------------------------------------------------------------------
 --https://leetcode.com/problems/friend-requests-ii-who-has-the-most-friends/submissions/
 Friend Requests II: Who Has the Most Friends
 
