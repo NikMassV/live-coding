@@ -1,4 +1,18 @@
 ------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/customers-who-bought-all-products/description/
+Customers Who Bought All Products
+
+SELECT
+    customer_id
+FROM customer
+GROUP BY customer_id
+HAVING COUNT(DISTINCT product_key) = (
+    SELECT
+        COUNT(DISTINCT product_key)
+    FROM product
+)
+
+------------------------------------------------------------------------------------------------------------------------
 --https://leetcode.com/problems/tree-node/description/
 Tree Node
 
