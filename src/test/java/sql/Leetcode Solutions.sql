@@ -1,4 +1,22 @@
 ------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/product-sales-analysis-iii/description/
+Product Sales Analysis III
+
+SELECT
+    product_id,
+    year AS first_year,
+    quantity,
+    price
+FROM sales
+WHERE (product_id, year) IN (
+    SELECT
+        product_id,
+        MIN(year)
+    FROM sales
+    GROUP BY product_id
+);
+
+------------------------------------------------------------------------------------------------------------------------
 --https://leetcode.com/problems/customers-who-bought-all-products/description/
 Customers Who Bought All Products
 
