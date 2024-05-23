@@ -584,3 +584,13 @@ FROM teacher
 GROUP BY teacher_id;
 
 ------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/replace-employee-id-with-the-unique-identifier/description/
+Replace Employee ID With The Unique Identifier
+
+SELECT
+    eu.unique_id,
+    e.name
+FROM EmployeeUNI eu
+RIGHT JOIN Employees e ON eu.id = e.id;
+
+------------------------------------------------------------------------------------------------------------------------
