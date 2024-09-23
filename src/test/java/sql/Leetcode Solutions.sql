@@ -1,4 +1,19 @@
 ------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/exchange-seats/description/
+Exchange Seats
+
+SELECT (
+    CASE WHEN id % 2 = 1 AND id = (SELECT max(id) FROM Seat) THEN id
+    WHEN id % 2 = 1 THEN id + 1
+    WHEN id % 2 = 0 THEN id - 1
+    END
+) AS
+    id,
+    student
+FROM Seat
+ORDER BY id
+
+------------------------------------------------------------------------------------------------------------------------
 --https://leetcode.com/problems/group-sold-products-by-the-date/description/
 Group Sold Products By The Date
 
