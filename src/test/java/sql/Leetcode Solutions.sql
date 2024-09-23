@@ -1,4 +1,19 @@
 ------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/last-person-to-fit-in-the-bus/description/
+Last Person to Fit in the Bus
+
+SELECT person_name
+FROM (
+    SELECT person_id,
+           person_name,
+           SUM(weight) OVER (ORDER BY turn) AS cum_sum
+     FROM Queue
+     ORDER BY turn DESC
+)
+WHERE cum_sum <= 1000
+LIMIT 1
+
+------------------------------------------------------------------------------------------------------------------------
 --https://leetcode.com/problems/exchange-seats/description/
 Exchange Seats
 
