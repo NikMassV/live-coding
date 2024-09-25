@@ -1,4 +1,15 @@
 ------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/product-price-at-a-given-date/
+Product Price at a Given Date
+
+SELECT DISTINCT ON (p1.product_id)
+    p1.product_id,
+    coalesce(p2.new_price, 10) as price
+FROM products p1
+LEFT JOIN products p2 ON p1.product_id = p2.product_id and p2.change_date <= '2019-08-16'
+ORDER BY p1.product_id, p2.change_date DESC
+
+------------------------------------------------------------------------------------------------------------------------
 --https://leetcode.com/problems/last-person-to-fit-in-the-bus/description/
 Last Person to Fit in the Bus
 
