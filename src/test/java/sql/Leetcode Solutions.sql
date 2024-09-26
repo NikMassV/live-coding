@@ -1,4 +1,18 @@
 ------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/monthly-transactions-i/
+Monthly Transactions I
+
+SELECT
+    to_char(trans_date, 'yyyy-mm') AS month,
+    country,
+    COUNT(amount) AS trans_count,
+    COUNT(CASE WHEN state = 'approved' THEN amount ELSE NULL END) AS approved_count,
+    SUM(amount) AS trans_total_amount,
+    SUM(CASE WHEN state = 'approved' THEN amount ELSE 0 END) AS approved_total_amount
+FROM Transactions t
+GROUP BY 1,2
+
+------------------------------------------------------------------------------------------------------------------------
 --https://leetcode.com/problems/product-price-at-a-given-date/
 Product Price at a Given Date
 
