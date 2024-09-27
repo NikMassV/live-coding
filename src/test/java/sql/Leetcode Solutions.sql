@@ -1,4 +1,23 @@
 ------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/restaurant-growth/description/
+Restaurant Growth
+
+WITH day_sum AS (
+    SELECT
+        visited_on,
+        SUM(amount) AS sum_amount
+    FROM Customer
+    GROUP BY visited_on
+    ORDER BY visited_on
+)
+SELECT
+    visited_on,
+    SUM(sum_amount) OVER (ROWS BETWEEN 6 PRECEDING AND CURRENT ROW) AS amount,
+    ROUND(AVG(sum_amount) OVER (ROWS BETWEEN 6 PRECEDING AND CURRENT ROW), 2) AS average_amount
+FROM day_sum
+OFFSET 6
+
+------------------------------------------------------------------------------------------------------------------------
 --https://leetcode.com/problems/monthly-transactions-i/
 Monthly Transactions I
 
