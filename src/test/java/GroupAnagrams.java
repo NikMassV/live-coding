@@ -10,6 +10,7 @@ public class GroupAnagrams {
     public void test() {
         List<List<String>> expected = List.of(List.of("bat"), List.of("tan", "nat"), List.of("eat", "tea", "ate"));
         assertThat(expected).hasSameElementsAs(groupAnagrams(new String[]{"eat", "tea", "tan", "ate", "nat", "bat"}));
+        assertThat(expected).hasSameElementsAs(groupAnagrams1(new String[]{"eat", "tea", "tan", "ate", "nat", "bat"}));
     }
 
     private List<List<String>> groupAnagrams(String[] strs) {
@@ -25,5 +26,21 @@ public class GroupAnagrams {
             keyAnagramGroupMap.get(key).add(s);
         }
         return new ArrayList<>(keyAnagramGroupMap.values());
+    }
+
+    private List<List<String>> groupAnagrams1(String[] strs) {
+        Map<String, List<String>> result = new HashMap<>();
+        for (String s : strs) {
+            int[] count = new int[26];
+            for (char c : s.toCharArray()) {
+                count[c - 'a']++;
+            }
+            String key = Arrays.toString(count);
+            if (!result.containsKey(key)) {
+                result.put(key, new ArrayList<>());
+            }
+            result.get(key).add(s);
+        }
+        return new ArrayList<>(result.values());
     }
 }
