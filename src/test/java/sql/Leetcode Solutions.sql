@@ -1,4 +1,20 @@
 ------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/count-salary-categories/description/
+Count Salary Categories
+
+SELECT 'Low Salary' AS category, COUNT(account_id) accounts_count
+FROM Accounts
+WHERE income < 20000
+UNION
+SELECT 'Average Salary' AS category, COUNT(account_id) accounts_count
+FROM Accounts
+WHERE income BETWEEN 20000 AND 50000
+UNION
+SELECT 'High Salary' AS category, COUNT(account_id) accounts_count
+FROM Accounts
+WHERE income > 50000
+
+------------------------------------------------------------------------------------------------------------------------
 --https://leetcode.com/problems/capital-gainloss/description/
 Capital Gain/Loss
 
