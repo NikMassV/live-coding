@@ -1,4 +1,28 @@
 ------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/movie-rating/description/
+Movie Rating
+
+SELECT unnest(array[
+    (
+        SELECT
+            u.name
+        FROM MovieRating mv
+        JOIN users u ON mv.user_id = u.user_id
+        ORDER BY COUNT(movie_id) OVER (PARTITION BY mv.user_id) DESC, u.name
+        LIMIT 1
+    ),
+    (
+        SELECT
+            m.title
+        FROM MovieRating mv
+        JOIN movies m ON mv.movie_id = m.movie_id
+        WHERE mv.created_at BETWEEN '2020-02-01' AND '2020-02-29'
+        ORDER BY AVG(mv.rating) OVER (PARTITION BY mv.movie_id) DESC, m.title
+        LIMIT 1
+    )
+]) results;
+
+------------------------------------------------------------------------------------------------------------------------
 --https://leetcode.com/problems/count-salary-categories/description/
 Count Salary Categories
 
