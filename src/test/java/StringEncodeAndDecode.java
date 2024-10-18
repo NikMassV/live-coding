@@ -13,7 +13,7 @@ public class StringEncodeAndDecode {
         assertEquals(List.of("neet", "code", "love", "you"), decode("4#neet4#code4#love3#you"));
     }
 
-    public String encode(List<String> strs) {
+    private String encode(List<String> strs) {
         StringBuilder encodedString = new StringBuilder();
         for (String str : strs) {
             encodedString.append(str.length()).append("#").append(str);
@@ -21,7 +21,7 @@ public class StringEncodeAndDecode {
         return encodedString.toString();
     }
 
-    public List<String> decode(String str) {
+    private List<String> decode(String str) {
         List<String> decodedStrings = new ArrayList<>();
         int i = 0;
         while (i < str.length()) {
