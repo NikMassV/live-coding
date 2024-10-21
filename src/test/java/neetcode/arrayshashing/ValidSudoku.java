@@ -1,3 +1,5 @@
+package neetcode.arrayshashing;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -8,7 +10,7 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class IsValidSudoku {
+public class ValidSudoku {
 
     char[][] valid = {
             {'1', '2', '.', '.', '3', '.', '.', '.', '.'},

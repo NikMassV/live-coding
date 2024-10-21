@@ -1,4 +1,4 @@
-//https://leetcode.com/problems/two-sum/solutions/4288318/0ms-array-hash/
+package neetcode.arrayshashing;//https://leetcode.com/problems/two-sum/solutions/4288318/0ms-array-hash/
 
 import org.junit.jupiter.api.Test;
 
