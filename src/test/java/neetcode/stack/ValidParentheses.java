@@ -1,3 +1,5 @@
+package neetcode.stack;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -15,6 +17,10 @@ public class ValidParentheses {
         assertTrue(isValid("()[]{}"));
         assertFalse(isValid("(]"));
         assertTrue(isValid("([])"));
+        assertTrue(isValid2("()"));
+        assertTrue(isValid2("()[]{}"));
+        assertFalse(isValid2("(]"));
+        assertTrue(isValid2("([])"));
     }
 
     private boolean isValid(String s) {
@@ -35,5 +41,26 @@ public class ValidParentheses {
             }
         }
         return stack.isEmpty();
+    }
+
+    private boolean isValid2(String s) {
+        Stack<Character> brackets = new Stack<>();
+        Map<Character, Character> bracketLookup = new HashMap<>(3);
+        bracketLookup.put(')', '(');
+        bracketLookup.put('}', '{');
+        bracketLookup.put(']', '[');
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (bracketLookup.containsKey(c)) {
+                if (!brackets.isEmpty() && bracketLookup.get(c).equals(brackets.peek())) {
+                    brackets.pop();
+                } else {
+                    return false;
+                }
+            } else {
+                brackets.push(c);
+            }
+        }
+        return brackets.isEmpty();
     }
 }
