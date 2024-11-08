@@ -9,6 +9,7 @@ public class FindTargetInRotatedSortedArray {
     @Test
     public void test() {
         assertEquals(4, search(new int[]{3, 4, 5, 6, 1, 2}, 1));
+        assertEquals(5, search(new int[]{3, 4, 5, 6, 1, 2}, 2));
         assertEquals(-1, search(new int[]{3, 5, 6, 0, 1, 2}, 4));
     }
 
