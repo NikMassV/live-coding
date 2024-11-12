@@ -1,3 +1,5 @@
+package neetcode.linkedlist;
+
 import org.example.domain.ListNode;
 import org.junit.jupiter.api.Test;
 
