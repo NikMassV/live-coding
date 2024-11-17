@@ -8,13 +8,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class MergeTwoSortedLists {
 
     @Test
-    public void test() {
+    public void testMergeTwoLists() {
         ListNode list1 = new ListNode(1, new ListNode(2, new ListNode(4)));
         ListNode list2 = new ListNode(1, new ListNode(3, new ListNode(4)));
         ListNode result = new ListNode(1, new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(4))))));
         assertEquals(result, mergeTwoLists(list1, list2));
+    }
+
+    @Test
+    public void testMergeTwoLists2() {
+        ListNode list1 = new ListNode(1, new ListNode(2, new ListNode(4)));
+        ListNode list2 = new ListNode(1, new ListNode(3, new ListNode(4)));
+        ListNode result = new ListNode(1, new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(4))))));
         assertEquals(result, mergeTwoLists2(list1, list2));
     }
+
 
     private ListNode mergeTwoLists(ListNode list1, ListNode list2) {
         ListNode result = new ListNode(0);
