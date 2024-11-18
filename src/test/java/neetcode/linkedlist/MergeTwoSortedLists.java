@@ -16,11 +16,11 @@ public class MergeTwoSortedLists {
     }
 
     @Test
-    public void testMergeTwoLists2() {
+    public void testMergeTwoListsRec() {
         ListNode list1 = new ListNode(1, new ListNode(2, new ListNode(4)));
         ListNode list2 = new ListNode(1, new ListNode(3, new ListNode(4)));
         ListNode result = new ListNode(1, new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(4))))));
-        assertEquals(result, mergeTwoLists2(list1, list2));
+        assertEquals(result, mergeTwoListsRec(list1, list2));
     }
 
 
@@ -45,7 +45,7 @@ public class MergeTwoSortedLists {
         return result.next;
     }
 
-    private ListNode mergeTwoLists2(ListNode list1, ListNode list2) {
+    private ListNode mergeTwoListsRec(ListNode list1, ListNode list2) {
         if (list1 == null) {
             return list2;
         }
@@ -53,10 +53,10 @@ public class MergeTwoSortedLists {
             return list1;
         }
         if (list1.val <= list2.val) {
-            list1.next = mergeTwoLists(list1.next, list2);
+            list1.next = mergeTwoListsRec(list1.next, list2);
             return list1;
         } else {
-            list2.next = mergeTwoLists(list1, list2.next);
+            list2.next = mergeTwoListsRec(list1, list2.next);
             return list2;
         }
     }
