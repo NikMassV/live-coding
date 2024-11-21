@@ -1,5 +1,10 @@
+package neetcode.trees;
+
 import org.example.domain.TreeNode;
 import org.junit.jupiter.api.Test;
+
+import java.util.LinkedList;
+import java.util.Queue;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -20,6 +25,7 @@ public class MaximumDepthOfBinaryTree {
         treeNodeRoot.right = new TreeNode(3);
 
         assertEquals(4, maxDepth(treeNodeRoot));
+        assertEquals(4, maxDepthBreadthFirstSearch(treeNodeRoot));
     }
 
     private int maxDepth(TreeNode root) {
@@ -29,5 +35,27 @@ public class MaximumDepthOfBinaryTree {
         int leftMaxDepth = maxDepth(root.left);
         int rightMaxDepth = maxDepth(root.right);
         return leftMaxDepth > rightMaxDepth ? leftMaxDepth + 1 : rightMaxDepth + 1;
+    }
+
+    public int maxDepthBreadthFirstSearch(TreeNode root) {
+        Queue<TreeNode> q = new LinkedList<>();
+        if (root != null) {
+            q.add(root);
+        }
+        int level = 0;
+        while (!q.isEmpty()) {
+            int size = q.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = q.poll();
+                if (node.left != null) {
+                    q.add(node.left);
+                }
+                if (node.right != null) {
+                    q.add(node.right);
+                }
+            }
+            level++;
+        }
+        return level;
     }
 }
