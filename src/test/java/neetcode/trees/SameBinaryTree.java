@@ -1,11 +1,12 @@
-//https://leetcode.com/problems/same-tree/description/
+package neetcode.trees;//https://leetcode.com/problems/same-tree/description/
 
 import org.example.domain.TreeNode;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class SameTree {
+public class SameBinaryTree {
 
     @Test
     public void test() {
@@ -17,8 +18,13 @@ public class SameTree {
         tree2.left = new TreeNode(2);
         tree2.right = new TreeNode(3);
 
+        TreeNode tree3 = new TreeNode(1);
+        tree3.left = new TreeNode(3);
+        tree3.right = new TreeNode(2);
+
         // Test the isSameTree method
         assertTrue(isSameTree(tree1, tree2));
+        assertFalse(isSameTree(tree1, tree3));
     }
 
     private boolean isSameTree(TreeNode p, TreeNode q) {
@@ -33,5 +39,4 @@ public class SameTree {
         }
         return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
     }
-
 }
