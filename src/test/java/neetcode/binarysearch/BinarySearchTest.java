@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class BinarySearch {
+public class BinarySearchTest {
 
     @Test
     public void test() {
@@ -17,9 +17,9 @@ public class BinarySearch {
         int r = nums.length - 1;
         while (l <= r) {
             int m = l + ((r - l) / 2);
-            if (nums[m] > target) {
+            if (target < nums[m]) {
                 r = m - 1;
-            } else if (nums[m] < target) {
+            } else if (target > nums[m]) {
                 l = m + 1;
             } else {
                 return m;
