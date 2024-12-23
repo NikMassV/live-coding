@@ -10,19 +10,28 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class ContainsDuplicate {
 
     @Test
-    public void test() {
-        assertTrue(containsDuplicate(new int[] {1, 2, 1}));
-        assertFalse(containsDuplicate(new int[] {1, 2, 3}));
+    public void testForSolution() {
+        assertTrue(containsDuplicateFor(new int[]{1, 2, 1}));
+        assertFalse(containsDuplicateFor(new int[]{1, 2, 3}));
     }
 
-    private boolean containsDuplicate(int[] nums) {
-        Arrays.sort(nums);
+    @Test
+    public void testStreamSolution() {
+        assertTrue(containsDuplicateStream(new int[]{1, 2, 1}));
+        assertFalse(containsDuplicateStream(new int[]{1, 2, 3}));
+    }
 
-        for(int i=0; i<nums.length - 1; i++) {
-            if(nums[i] == nums[i + 1]) {
+    private boolean containsDuplicateFor(int[] nums) { //O(nlogn)
+        Arrays.sort(nums);
+        for (int i = 0; i < nums.length - 1; i++) {
+            if (nums[i] == nums[i + 1]) {
                 return true;
             }
         }
         return false;
+    }
+
+    private boolean containsDuplicateStream(int[] nums) { //O(n)
+        return Arrays.stream(nums).distinct().count() < nums.length;
     }
 }
