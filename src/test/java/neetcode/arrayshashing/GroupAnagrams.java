@@ -16,7 +16,9 @@ public class GroupAnagrams {
     }
 
     private List<List<String>> groupAnagrams(String[] strs) {
-        if (strs.length == 0) return new ArrayList<>();
+        if (strs.length == 0) {
+            return new ArrayList<>();
+        }
         Map<String, List<String>> keyAnagramGroupMap = new HashMap<>();
         for (String s : strs) {
             char[] sCharArray = s.toCharArray();
