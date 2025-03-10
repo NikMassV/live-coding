@@ -1,4 +1,12 @@
 ------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/find-users-with-valid-e-mails/description/
+Find Users With Valid E-Mails
+
+SELECT *
+FROM users
+WHERE mail ~ '^[a-zA-Z]+[a-zA-Z0-9_.-]*@leetcode\.com$';
+
+------------------------------------------------------------------------------------------------------------------------
 --https://leetcode.com/problems/department-top-three-salaries/
 Department Top Three Salaries
 
