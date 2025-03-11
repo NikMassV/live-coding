@@ -1,4 +1,12 @@
 ------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/patients-with-a-condition/description/
+Patients With a Condition
+
+SELECT *
+FROM Patients
+WHERE conditions LIKE 'DIAB1%' OR conditions LIKE '% DIAB1%'
+
+------------------------------------------------------------------------------------------------------------------------
 --https://leetcode.com/problems/find-users-with-valid-e-mails/description/
 Find Users With Valid E-Mails
 
