@@ -1,4 +1,21 @@
 ------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/percentage-of-users-attended-a-contest/
+Percentage of Users Attended a Contest
+
+WITH users AS (
+    SELECT
+        COUNT(user_id) AS user_count
+    FROM Users
+)
+SELECT
+    r.contest_id,
+    ROUND(COUNT(DISTINCT r.user_id) * 100.0 / u.user_count, 2) AS percentage
+FROM Register r
+CROSS JOIN users u
+GROUP BY r.contest_id, u.user_count
+ORDER BY percentage DESC, r.contest_id ASC
+
+------------------------------------------------------------------------------------------------------------------------
 --https://leetcode.com/problems/bank-account-summary-ii/submissions/1572939203/
 Bank Account Summary II
 
