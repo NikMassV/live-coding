@@ -1,4 +1,14 @@
 ------------------------------------------------------------------------------------------------------------------------
+Fix Names in a Table
+-- https://leetcode.com/problems/fix-names-in-a-table/description/
+
+SELECT
+    user_id,
+    UPPER(SUBSTRING(name FROM 1 FOR 1)) || LOWER(SUBSTRING(name FROM 2)) AS name
+FROM Users
+ORDER BY user_id
+
+------------------------------------------------------------------------------------------------------------------------
 --https://leetcode.com/problems/percentage-of-users-attended-a-contest/
 Percentage of Users Attended a Contest
 
