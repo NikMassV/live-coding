@@ -1,4 +1,13 @@
 ------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/invalid-tweets/
+Invalid Tweets
+
+SELECT
+    tweet_id
+FROM tweets
+WHERE CHAR_LENGTH(content) > 15
+
+------------------------------------------------------------------------------------------------------------------------
 -- https://leetcode.com/problems/fix-names-in-a-table/description/
 Fix Names in a Table
 
