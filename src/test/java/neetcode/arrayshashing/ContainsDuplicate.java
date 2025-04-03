@@ -3,6 +3,8 @@ package neetcode.arrayshashing;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -13,6 +15,12 @@ public class ContainsDuplicate {
     public void testForSolution() {
         assertTrue(containsDuplicateFor(new int[]{1, 2, 1}));
         assertFalse(containsDuplicateFor(new int[]{1, 2, 3}));
+    }
+
+    @Test
+    public void testStreamSolutionHashSet() {
+        assertTrue(containsDuplicateHashSet(new int[]{1, 2, 1}));
+        assertFalse(containsDuplicateHashSet(new int[]{1, 2, 3}));
     }
 
     @Test
@@ -27,6 +35,17 @@ public class ContainsDuplicate {
             if (nums[i] == nums[i + 1]) {
                 return true;
             }
+        }
+        return false;
+    }
+
+    private boolean containsDuplicateHashSet(int[] nums) {
+        Set<Integer> seen = new HashSet<>();
+        for (int num : nums) {
+            if (seen.contains(num)) {
+                return true;
+            }
+            seen.add(num);
         }
         return false;
     }
