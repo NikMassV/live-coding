@@ -1,4 +1,18 @@
 ------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/the-number-of-employees-which-report-to-each-employee/
+The Number of Employees Which Report to Each Employee
+
+SELECT
+    m.employee_id,
+    m.name,
+    COUNT(e.reports_to) AS reports_count,
+    ROUND(AVG(e.age)) AS average_age
+FROM Employees m
+JOIN Employees e ON m.employee_id = e.reports_to
+GROUP BY 1, 2
+ORDER BY employee_id
+
+------------------------------------------------------------------------------------------------------------------------
 --https://leetcode.com/problems/find-followers-count/description/
 Find Followers Count
 
