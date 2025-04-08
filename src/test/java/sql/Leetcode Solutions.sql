@@ -1,4 +1,15 @@
 ------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/find-total-time-spent-by-each-employee/
+Find Total Time Spent by Each Employee
+
+SELECT
+    event_day AS day,
+    emp_id,
+    SUM(out_time) - SUM(in_time) AS total_time
+FROM Employees
+GROUP BY event_day, emp_id
+
+------------------------------------------------------------------------------------------------------------------------
 --https://leetcode.com/problems/the-number-of-employees-which-report-to-each-employee/
 The Number of Employees Which Report to Each Employee
 
@@ -9,7 +20,7 @@ SELECT
     ROUND(AVG(e.age)) AS average_age
 FROM Employees m
 JOIN Employees e ON m.employee_id = e.reports_to
-GROUP BY 1, 2
+GROUP BY m.employee_id, m.name
 ORDER BY employee_id
 
 ------------------------------------------------------------------------------------------------------------------------
