@@ -919,3 +919,12 @@ FROM EmployeeUNI eu
 RIGHT JOIN Employees e ON eu.id = e.id;
 
 ------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/recyclable-and-low-fat-products/description/
+Recyclable and Low Fat Products
+
+SELECT
+    product_id
+FROM Products
+WHERE low_fats = 'Y' and recyclable = 'Y'
+
+------------------------------------------------------------------------------------------------------------------------
