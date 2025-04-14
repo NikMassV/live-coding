@@ -57,6 +57,31 @@ WHERE first_score < latest_score AND diff_dates > 1
 ORDER BY student_id, subject
 
 ------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/rearrange-products-table/
+Rearrange Products Table
+
+SELECT
+    product_id,
+    'store1' AS store,
+    store1 AS price
+FROM Products
+WHERE store1 IS NOT NULL
+UNION
+SELECT
+    product_id,
+    'store2' AS store,
+    store2 AS price
+FROM Products
+WHERE store2 IS NOT NULL
+UNION
+SELECT
+    product_id,
+    'store3' AS store,
+    store3 AS price
+FROM Products
+WHERE store3 IS NOT NULL
+
+------------------------------------------------------------------------------------------------------------------------
 --https://leetcode.com/problems/daily-leads-and-partners/description/
 Daily Leads and Partners
 
