@@ -1016,3 +1016,14 @@ WHERE salary < 30000 AND manager_id NOT IN
 ORDER BY employee_id
 
 ------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/find-valid-emails/description/
+Find Valid Emails
+
+SELECT
+    user_id,
+    email
+FROM Users
+WHERE email ~ '^[a-zA-Z0-9]+@[a-zA-Z]+\.com$'
+ORDER BY user_id
+
+------------------------------------------------------------------------------------------------------------------------
