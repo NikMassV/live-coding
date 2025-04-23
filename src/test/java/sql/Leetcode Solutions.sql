@@ -1,4 +1,17 @@
 ------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/analyze-subscription-conversion/description/?difficulty=MEDIUM&page=1
+Analyze Subscription Conversion
+
+SELECT
+    user_id,
+    ROUND(AVG(CASE activity_type WHEN 'free_trial' THEN activity_duration ELSE NULL END), 2) AS trial_avg_duration,
+    ROUND(AVG(CASE activity_type WHEN 'paid' THEN activity_duration ELSE NULL END), 2) AS paid_avg_duration
+FROM UserActivity
+GROUP BY user_id
+HAVING AVG(CASE WHEN activity_type = 'paid' THEN 1.0 * activity_duration END) IS NOT NULL
+ORDER BY user_id ASC
+
+------------------------------------------------------------------------------------------------------------------------
 --https://leetcode.com/problems/dna-pattern-recognition/
 DNA Pattern Recognition
 
