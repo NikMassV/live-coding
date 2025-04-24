@@ -1,4 +1,23 @@
 ------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/find-product-recommendation-pairs/description/
+Find Product Recommendation Pairs
+
+SELECT
+    p1.product_id AS product1_id,
+    p2.product_id AS product2_id,
+    pi1.category AS product1_category,
+    pi2.category AS product2_category,
+    COUNT(p1.user_id) AS customer_count
+FROM ProductPurchases p1
+JOIN ProductPurchases p2 ON p1.user_id = p2.user_id
+JOIN ProductInfo pi1 ON p1.product_id = pi1.product_id
+JOIN ProductInfo pi2 ON p2.product_id = pi2.product_id
+WHERE p1.product_id != p2.product_id AND p1.product_id < p2.product_id
+GROUP BY 1, 2, 3, 4
+HAVING COUNT(p1.user_id) > 2
+ORDER BY customer_count DESC, product1_id, product2_id
+
+------------------------------------------------------------------------------------------------------------------------
 --https://leetcode.com/problems/analyze-subscription-conversion/description/?difficulty=MEDIUM&page=1
 Analyze Subscription Conversion
 
