@@ -1,4 +1,4 @@
-package org.example.refactoring;
+package org.example.refactoring.transactional;
 
 import org.springframework.stereotype.Service;
 

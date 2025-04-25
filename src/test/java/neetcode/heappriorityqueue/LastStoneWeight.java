@@ -2,7 +2,9 @@ package neetcode.heappriorityqueue;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.PriorityQueue;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -26,6 +28,11 @@ public class LastStoneWeight {
             }
         }
         minHeap.offer(0);
+        List<String> names = List.of("Anna", "Bob", "Charlie");
+        var res = names.stream().filter(n -> n.startsWith("A")).toList();
+        System.out.println(res);
         return Math.abs(minHeap.peek());
     }
+
+    //latest solution
 }
