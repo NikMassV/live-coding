@@ -1085,3 +1085,15 @@ WHERE email ~ '^[a-zA-Z0-9]+@[a-zA-Z]+\.com$'
 ORDER BY user_id
 
 ------------------------------------------------------------------------------------------------------------------------
+--https://leetcode.com/problems/find-products-with-valid-serial-numbers/description/
+Find Products with Valid Serial Numbers
+
+SELECT
+    product_id,
+    product_name,
+    description
+FROM products
+WHERE description LIKE '%SN____-____ %' OR description LIKE '%SN____-____'
+ORDER BY product_id
+
+------------------------------------------------------------------------------------------------------------------------
