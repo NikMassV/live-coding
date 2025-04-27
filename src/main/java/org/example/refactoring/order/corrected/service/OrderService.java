@@ -1,7 +1,8 @@
-package org.example.refactoring.order.source;
+package org.example.refactoring.order.corrected.service;
 
-import io.r2dbc.spi.ConnectionFactory;
-import org.springframework.r2dbc.core.DatabaseClient;
+import org.example.refactoring.order.corrected.domain.Order;
+import org.example.refactoring.order.corrected.enums.OrderStatus;
+import org.example.refactoring.order.corrected.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
@@ -10,10 +11,10 @@ import reactor.core.publisher.Mono;
 public class OrderService {
 
     private static long lastId = 0;
-    private final DatabaseClient databaseClient;
+    private final OrderRepository orderRepository;
 
-    public OrderService(ConnectionFactory connectionFactory) {
-        this.databaseClient = DatabaseClient.create(connectionFactory);
+    public OrderService(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
     }
 
     public Mono<Order> createOrder(Order order) {
@@ -77,43 +78,17 @@ public class OrderService {
         }
         order.setPrice(finalPrice);
 
-        order.setStatus("Not completed");
+        order.setStatus(OrderStatus.NOT_COMPLETED);
 
-        String sql = "INSERT INTO orders (id, type, bouquet_name, gift_wrap, set_items, status, price) VALUES ("
-                + order.getId() + ", '" + order.getType() + "', "
-                + (order.getBouquetName() != null ? ("'" + order.getBouquetName() + "'") : "NULL") + ", "
-                + (order.getGiftWrap() != null ? order.getGiftWrap().toString() : "NULL") + ", "
-                + (order.getToyName() != null ? ("'" + order.getToyName() + "'") : "NULL") + ", "
-                + "'" + order.getStatus() + "', " + order.getPrice() + ")";
-
-        return databaseClient.sql(sql)
-                .fetch()
-                .rowsUpdated()
-                .map(count -> order);
+        return orderRepository.insertOrder(order);
     }
 
     public Mono<Order> getOrder(Long id) {
-        String sql = "SELECT * FROM orders WHERE id = " + id;
-        return databaseClient.sql(sql)
-                .map((row, meta) -> {
-                    Order o = new Order();
-                    o.setId(row.get("id", Long.class));
-                    o.setType(String.valueOf(row.get("type", Enum.class)));
-                    o.setBouquetName(String.valueOf(row.get("bouquet_name", Enum.class)));
-                    o.setToyName(row.get("toy_name", String.class));
-                    o.setGiftWrap(row.get("gift_wrap", Boolean.class));
-                    o.setStatus(row.get("status", String.class));
-                    o.setPrice(row.get("price", Double.class));
-                    return o;
-                })
-                .one();
+        return orderRepository.selectOrder(id);
     }
 
     public Mono<Order> markOrderAsCompleted(Long id) {
-        String sql = "UPDATE orders SET status = 'Completed' WHERE id = " + id;
-        return databaseClient.sql(sql)
-                .fetch()
-                .rowsUpdated()
-                .flatMap(result -> getOrder(id));
+        return orderRepository.updateOrderAsCompleted(id);
     }
 }
+

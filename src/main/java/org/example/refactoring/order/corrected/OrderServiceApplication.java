@@ -1,4 +1,4 @@
-package org.example.refactoring.order;
+package org.example.refactoring.order.corrected;
 
 import io.r2dbc.spi.ConnectionFactory;
 import org.springframework.boot.SpringApplication;

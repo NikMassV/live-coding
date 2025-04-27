@@ -1,7 +1,7 @@
-package org.example.refactoring.order.controller;
+package org.example.refactoring.order.corrected.controller;
 
-import org.example.refactoring.order.source.Order;
-import org.example.refactoring.order.source.OrderService;
+import org.example.refactoring.order.corrected.domain.Order;
+import org.example.refactoring.order.corrected.service.OrderService;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 

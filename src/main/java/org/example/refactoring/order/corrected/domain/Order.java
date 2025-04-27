@@ -1,22 +1,19 @@
-package org.example.refactoring.order.domain;
+package org.example.refactoring.order.corrected.domain;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.example.refactoring.order.enums.OrderStatus;
-import org.example.refactoring.order.enums.OrderType;
-
-import java.math.BigDecimal;
+import org.example.refactoring.order.corrected.enums.OrderStatus;
 
 public class Order {
 
     private Long id;
-    private OrderType type;
+    private String type;
     private OrderStatus status;
     private String bouquetName;
     private String toyName;
     private Boolean giftWrap;
-    private BigDecimal price;
+    private Double price;
 
     public Order() {
     }
@@ -24,15 +21,16 @@ public class Order {
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
 
-    public OrderType getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(OrderType type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -47,6 +45,7 @@ public class Order {
     public String getBouquetName() {
         return bouquetName;
     }
+
     public void setBouquetName(String bouquetName) {
         this.bouquetName = bouquetName;
     }
@@ -54,6 +53,7 @@ public class Order {
     public Boolean getGiftWrap() {
         return giftWrap;
     }
+
     public void setGiftWrap(Boolean giftWrap) {
         this.giftWrap = giftWrap;
     }
@@ -66,11 +66,11 @@ public class Order {
         this.toyName = toyName;
     }
 
-    public BigDecimal getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
