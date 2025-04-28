@@ -2,7 +2,9 @@ package org.example.refactoring.order.corrected.service;
 
 import org.example.refactoring.order.corrected.domain.Order;
 import org.example.refactoring.order.corrected.enums.OrderStatus;
+import org.example.refactoring.order.corrected.exception.OrderValidationException;
 import org.example.refactoring.order.corrected.repository.OrderRepository;
+import org.example.refactoring.order.corrected.validator.order.OrderValidatorRegistry;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
@@ -12,9 +14,11 @@ public class OrderService {
 
     private static long lastId = 0;
     private final OrderRepository orderRepository;
+    private final OrderValidatorRegistry orderValidatorRegistry;
 
-    public OrderService(OrderRepository orderRepository) {
+    public OrderService(OrderRepository orderRepository, OrderValidatorRegistry orderValidatorRegistry) {
         this.orderRepository = orderRepository;
+        this.orderValidatorRegistry = orderValidatorRegistry;
     }
 
     public Mono<Order> createOrder(Order order) {
@@ -26,24 +30,11 @@ public class OrderService {
             return Mono.error(new RuntimeException("Order type is required"));
         }
 
-        switch (order.getType()) {
-            case "flower":
-                if (order.getBouquetName() == null || order.getBouquetName().isEmpty()) {
-                    return Mono.error(new RuntimeException("Bouquet name is required for flower orders"));
-                }
-                break;
-            case "gift":
-                if (order.getGiftWrap() == null) {
-                    return Mono.error(new RuntimeException("Gift wrap option must be specified for gift orders"));
-                }
-                break;
-            case "toy":
-                if (order.getToyName() == null || order.getToyName().isEmpty()) {
-                    return Mono.error(new RuntimeException("Set items are required for toy orders"));
-                }
-                break;
-            default:
-                return Mono.error(new RuntimeException("Unsupported order type: " + order.getType()));
+        try {
+            String typeValue = order.getType().getType();
+            orderValidatorRegistry.getValidator(typeValue).validate(order);
+        } catch (OrderValidationException e) {
+            return Mono.error(e);
         }
 
         double basePrice;

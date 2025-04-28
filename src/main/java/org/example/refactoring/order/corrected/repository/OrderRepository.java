@@ -2,10 +2,13 @@ package org.example.refactoring.order.corrected.repository;
 
 import io.r2dbc.spi.ConnectionFactory;
 import org.example.refactoring.order.corrected.domain.Order;
+import org.example.refactoring.order.corrected.domain.OrderType;
 import org.example.refactoring.order.corrected.enums.OrderStatus;
 import org.springframework.r2dbc.core.DatabaseClient;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
+
+import java.util.Objects;
 
 @Repository
 public class OrderRepository {
@@ -36,7 +39,10 @@ public class OrderRepository {
                 .map((row, meta) -> {
                     Order o = new Order();
                     o.setId(row.get("id", Long.class));
-                    o.setType(row.get("type", String.class));
+                    OrderType<?> rawType = row.get("type", OrderType.class);
+                    OrderType<String> typedType = new OrderType<>();
+                    typedType.setType(Objects.requireNonNull(rawType).getType().toString());
+                    o.setType(typedType);
                     o.setStatus(row.get("status", OrderStatus.class));
                     o.setBouquetName(String.valueOf(row.get("bouquet_name", Enum.class)));
                     o.setToyName(row.get("toy_name", String.class));

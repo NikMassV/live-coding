@@ -1,14 +1,11 @@
 package org.example.refactoring.order.corrected.domain;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.example.refactoring.order.corrected.enums.OrderStatus;
 
 public class Order {
 
     private Long id;
-    private String type;
+    private OrderType<String> type;
     private OrderStatus status;
     private String bouquetName;
     private String toyName;
@@ -26,11 +23,11 @@ public class Order {
         this.id = id;
     }
 
-    public String getType() {
+    public OrderType<String> getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(OrderType<String> type) {
         this.type = type;
     }
 
@@ -74,18 +71,5 @@ public class Order {
         this.price = price;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        return EqualsBuilder.reflectionEquals(this, o);
-    }
 
-    @Override
-    public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
-    }
-
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this);
-    }
 }
