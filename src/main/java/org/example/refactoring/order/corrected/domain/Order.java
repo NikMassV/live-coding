@@ -1,11 +1,13 @@
 package org.example.refactoring.order.corrected.domain;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.example.refactoring.order.corrected.enums.OrderStatus;
 
 public class Order {
 
     private Long id;
-    private OrderType<String> type;
+    private OrderType<?> type;
     private OrderStatus status;
     private String bouquetName;
     private String toyName;
@@ -23,11 +25,11 @@ public class Order {
         this.id = id;
     }
 
-    public OrderType<String> getType() {
+    public OrderType<?> getType() {
         return type;
     }
 
-    public void setType(OrderType<String> type) {
+    public void setType(OrderType<?> type) {
         this.type = type;
     }
 
@@ -71,5 +73,48 @@ public class Order {
         this.price = price;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
 
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Order order = (Order) o;
+
+        return new EqualsBuilder()
+                .append(id, order.id)
+                .append(type, order.type)
+                .append(status, order.status)
+                .append(bouquetName, order.bouquetName)
+                .append(toyName, order.toyName)
+                .append(giftWrap, order.giftWrap)
+                .append(price, order.price)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(id)
+                .append(type)
+                .append(status)
+                .append(bouquetName)
+                .append(toyName)
+                .append(giftWrap)
+                .append(price)
+                .toHashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", type=" + type +
+                ", status=" + status +
+                ", bouquetName='" + bouquetName + '\'' +
+                ", toyName='" + toyName + '\'' +
+                ", giftWrap=" + giftWrap +
+                ", price=" + price +
+                '}';
+    }
 }

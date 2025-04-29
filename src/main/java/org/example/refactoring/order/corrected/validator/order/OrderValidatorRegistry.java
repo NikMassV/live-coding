@@ -6,18 +6,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class OrderValidatorRegistry {
-    private final Map<String, OrderValidator> validators = new HashMap<>();
+    private final Map<Class<?>, OrderValidator> validators = new HashMap<>();
 
-    public OrderValidatorRegistry() {
-        validators.put("flower", new FlowerOrderValidator());
-        validators.put("gift", new GiftOrderValidator());
-        validators.put("toy", new ToyOrderValidator());
+    public void registerValidator(Class<?> orderType, OrderValidator validator) {
+        validators.put(orderType, validator);
     }
 
-    public OrderValidator getValidator(String type) {
-        OrderValidator validator = validators.get(type);
+    public OrderValidator getValidator(Class<?> orderType) {
+        OrderValidator validator = validators.get(orderType);
         if (validator == null) {
-            throw new OrderValidationException("Unsupported order type: " + type);
+            throw new OrderValidationException("Unsupported order type: " + orderType);
         }
         return validator;
     }

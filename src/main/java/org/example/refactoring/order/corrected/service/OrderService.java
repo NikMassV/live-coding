@@ -1,10 +1,14 @@
 package org.example.refactoring.order.corrected.service;
 
 import org.example.refactoring.order.corrected.domain.Order;
+import org.example.refactoring.order.corrected.domain.OrderType;
 import org.example.refactoring.order.corrected.enums.OrderStatus;
 import org.example.refactoring.order.corrected.exception.OrderValidationException;
 import org.example.refactoring.order.corrected.repository.OrderRepository;
+import org.example.refactoring.order.corrected.validator.order.FlowerOrderValidator;
+import org.example.refactoring.order.corrected.validator.order.GiftOrderValidator;
 import org.example.refactoring.order.corrected.validator.order.OrderValidatorRegistry;
+import org.example.refactoring.order.corrected.validator.order.ToyOrderValidator;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
@@ -19,6 +23,9 @@ public class OrderService {
     public OrderService(OrderRepository orderRepository, OrderValidatorRegistry orderValidatorRegistry) {
         this.orderRepository = orderRepository;
         this.orderValidatorRegistry = orderValidatorRegistry;
+        orderValidatorRegistry.registerValidator(OrderType.class, new FlowerOrderValidator());
+        orderValidatorRegistry.registerValidator(OrderType.class, new GiftOrderValidator());
+        orderValidatorRegistry.registerValidator(OrderType.class, new ToyOrderValidator());
     }
 
     public Mono<Order> createOrder(Order order) {
@@ -31,7 +38,7 @@ public class OrderService {
         }
 
         try {
-            String typeValue = order.getType().getType();
+            Class<?> typeValue = order.getType().getClass();
             orderValidatorRegistry.getValidator(typeValue).validate(order);
         } catch (OrderValidationException e) {
             return Mono.error(e);
