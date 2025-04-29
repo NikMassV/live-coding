@@ -8,6 +8,7 @@ import org.springframework.r2dbc.core.DatabaseClient;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 @Repository
@@ -47,7 +48,7 @@ public class OrderRepository {
                     o.setBouquetName(String.valueOf(row.get("bouquet_name", Enum.class)));
                     o.setToyName(row.get("toy_name", String.class));
                     o.setGiftWrap(row.get("gift_wrap", Boolean.class));
-                    o.setPrice(row.get("price", Double.class));
+                    o.setPrice(row.get("price", BigDecimal.class));
                     return o;
                 })
                 .one();

@@ -4,6 +4,8 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.example.refactoring.order.corrected.enums.OrderStatus;
 
+import java.math.BigDecimal;
+
 public class Order {
 
     private Long id;
@@ -12,7 +14,7 @@ public class Order {
     private String bouquetName;
     private String toyName;
     private Boolean giftWrap;
-    private Double price;
+    private BigDecimal price;
 
     public Order() {
     }
@@ -65,11 +67,11 @@ public class Order {
         this.toyName = toyName;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
