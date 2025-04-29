@@ -2,6 +2,7 @@ package org.example.refactoring.order.corrected.service;
 
 import org.example.refactoring.order.corrected.domain.Order;
 import org.example.refactoring.order.corrected.enums.OrderStatus;
+import org.example.refactoring.order.corrected.properties.DiscountProperties;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
@@ -14,8 +15,10 @@ import java.util.Map;
 public class DiscountService {
 
     private final Map<Class<?>, BigDecimal> discounts = new HashMap<>();
+    private final DiscountProperties discountProperties;
 
-    public DiscountService() {
+    public DiscountService(DiscountProperties discountProperties) {
+        this.discountProperties = discountProperties;
         discounts.put("flower".getClass(), BigDecimal.valueOf(100.0));
         discounts.put("gift".getClass(), BigDecimal.valueOf(50.0));
         discounts.put("set".getClass(), BigDecimal.valueOf(150.0));
@@ -29,8 +32,10 @@ public class DiscountService {
 
         WebClient webClient = WebClient.create();
 
+        String url = discountProperties.getApiUrl().replace("{type}", order.getType().toString());
+
         return webClient.get()
-                .uri("http://discount.example.com/api/discount?type={type}", order.getType())
+                .uri(url)
                 .retrieve()
                 .bodyToMono(String.class)
                 .map(discountStr -> {
@@ -48,8 +53,7 @@ public class DiscountService {
                     return order;
                 })
                 .onErrorResume(e -> {
-                    BigDecimal finalPrice = basePrice;
-                    order.setPrice(finalPrice);
+                    order.setPrice(basePrice);
                     order.setStatus(OrderStatus.NOT_COMPLETED);
                     return Mono.just(order);
                 });
