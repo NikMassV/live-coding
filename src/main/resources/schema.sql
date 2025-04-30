@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS orders (
-    id BIGINT PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     type VARCHAR(16) NOT NULL,
     bouquet_name VARCHAR(255),
     gift_wrap BOOLEAN,

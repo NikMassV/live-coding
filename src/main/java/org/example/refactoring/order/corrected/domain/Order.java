@@ -5,10 +5,11 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.example.refactoring.order.corrected.enums.OrderStatus;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 public class Order {
 
-    private Long id;
+    private UUID id;
     private OrderType<?> type;
     private OrderStatus status;
     private String bouquetName;
@@ -19,11 +20,11 @@ public class Order {
     public Order() {
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

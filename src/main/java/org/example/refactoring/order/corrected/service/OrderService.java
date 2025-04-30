@@ -15,7 +15,6 @@ import reactor.core.publisher.Mono;
 @Service
 public class OrderService {
 
-    private static long lastId = 0;
     private final OrderRepository orderRepository;
     private final OrderValidatorRegistry orderValidatorRegistry;
     private final DiscountService discountService;
@@ -29,10 +28,8 @@ public class OrderService {
         orderValidatorRegistry.registerValidator(OrderType.class, new ToyOrderValidator());
     }
 
+    @Transactional
     public Mono<Order> createOrder(Order order) {
-        long newId = ++lastId;
-        order.setId(newId);
-
         if (order.getType() == null) {
             return Mono.error(new RuntimeException("Order type is required"));
         }

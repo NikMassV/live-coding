@@ -10,6 +10,7 @@ import reactor.core.publisher.Mono;
 import java.math.BigDecimal;
 import java.util.NoSuchElementException;
 import java.util.Objects;
+import java.util.UUID;
 
 @Repository
 public class OrderRepository {
@@ -36,6 +37,10 @@ public class OrderRepository {
                 .bind("price", order.getPrice())
                 .fetch()
                 .rowsUpdated()
+                .map(row -> {
+                    order.setId(UUID.randomUUID());
+                    return order;
+                })
                 .thenReturn(order);
     }
 
@@ -44,7 +49,7 @@ public class OrderRepository {
                 .bind("id", id)
                 .map((row, meta) -> {
                     Order o = new Order();
-                    o.setId(row.get("id", Long.class));
+                    o.setId(row.get("id", UUID.class));
                     OrderType<?> rawType = row.get("type", OrderType.class);
                     OrderType<String> typedType = new OrderType<>();
                     typedType.setType(Objects.requireNonNull(rawType).getType().toString());
