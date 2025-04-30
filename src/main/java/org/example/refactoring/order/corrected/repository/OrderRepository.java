@@ -1,6 +1,5 @@
 package org.example.refactoring.order.corrected.repository;
 
-import io.r2dbc.spi.ConnectionFactory;
 import org.example.refactoring.order.corrected.domain.Order;
 import org.example.refactoring.order.corrected.domain.OrderType;
 import org.example.refactoring.order.corrected.enums.OrderStatus;
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
 
 import java.math.BigDecimal;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 @Repository
@@ -16,27 +16,32 @@ public class OrderRepository {
 
     private final DatabaseClient databaseClient;
 
-    public OrderRepository(ConnectionFactory connectionFactory) {
-        this.databaseClient = DatabaseClient.create(connectionFactory);
+    public OrderRepository(DatabaseClient databaseClient) {
+        this.databaseClient = databaseClient;
     }
 
     public Mono<Order> insertOrder(Order order) {
-        String sql = "INSERT INTO orders (id, type, bouquet_name, gift_wrap, set_items, status, price) VALUES ("
-                + order.getId() + ", '" + order.getType() + "', "
-                + (order.getBouquetName() != null ? ("'" + order.getBouquetName() + "'") : "NULL") + ", "
-                + (order.getGiftWrap() != null ? order.getGiftWrap().toString() : "NULL") + ", "
-                + (order.getToyName() != null ? ("'" + order.getToyName() + "'") : "NULL") + ", "
-                + "'" + order.getStatus() + "', " + order.getPrice() + ")";
-
-        return databaseClient.sql(sql)
+        return databaseClient.sql("""
+                        INSERT INTO orders
+                        (id, type, boquet_name, gift_wrap, toy_name, status, price)
+                        VALUES
+                        (:id, :type, :boquetName, :giftWrap, :toyName, :status, :price)
+                        """)
+                .bind("id", order.getId())
+                .bind("type", order.getType().getType().toString())
+                .bind("bouquetName", order.getBouquetName())
+                .bind("giftWrap", order.getGiftWrap())
+                .bind("toyName", order.getToyName())
+                .bind("status", order.getStatus().toString())
+                .bind("price", order.getPrice())
                 .fetch()
                 .rowsUpdated()
-                .map(count -> order);
+                .thenReturn(order);
     }
 
     public Mono<Order> selectOrder(Long id) {
-        String sql = "SELECT * FROM orders WHERE id = " + id;
-        return databaseClient.sql(sql)
+        return databaseClient.sql("SELECT * FROM orders WHERE id = :id")
+                .bind("id", id)
                 .map((row, meta) -> {
                     Order o = new Order();
                     o.setId(row.get("id", Long.class));
@@ -55,10 +60,13 @@ public class OrderRepository {
     }
 
     public Mono<Order> updateOrderAsCompleted(Long id) {
-        String sql = "UPDATE orders SET status = 'Completed' WHERE id = " + id;
-        return databaseClient.sql(sql)
+        return databaseClient.sql("UPDATE orders SET status = 'COMPLETED' WHERE id = :id")
+                .bind("id", id)
                 .fetch()
                 .rowsUpdated()
-                .flatMap(result -> selectOrder(id));
+                .flatMap(updatedCount -> updatedCount > 0
+                        ? selectOrder(id)
+                        : Mono.error(new NoSuchElementException("Order not found"))
+                );
     }
 }

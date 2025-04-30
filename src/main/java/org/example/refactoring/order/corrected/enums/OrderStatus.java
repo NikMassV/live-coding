@@ -10,5 +10,7 @@ public enum OrderStatus {
 
     DELIVERED,
 
+    COMPLETED,
+
     NOT_COMPLETED
 }

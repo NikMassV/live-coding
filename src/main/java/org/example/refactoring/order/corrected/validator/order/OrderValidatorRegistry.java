@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class OrderValidatorRegistry {
+
     private final Map<Class<?>, OrderValidator> validators = new HashMap<>();
 
     public void registerValidator(Class<?> orderType, OrderValidator validator) {

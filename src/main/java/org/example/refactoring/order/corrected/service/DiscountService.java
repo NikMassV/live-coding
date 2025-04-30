@@ -31,9 +31,7 @@ public class DiscountService {
         }
 
         WebClient webClient = WebClient.create();
-
         String url = discountProperties.getApiUrl().replace("{type}", order.getType().toString());
-
         return webClient.get()
                 .uri(url)
                 .retrieve()
