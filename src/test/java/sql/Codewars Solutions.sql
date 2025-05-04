@@ -1,3 +1,25 @@
+------------------------------------------------------------------------------------------------------------------------
+--https://www.codewars.com/kata/6492b17a7c08e4005790053e/train/sql
+Youngest Team Members
+
+SELECT
+  employee_id,
+  full_name,
+  team,
+  birth_date
+FROM (
+    SELECT
+        *,
+        ROW_NUMBER() OVER (
+            PARTITION BY team
+            ORDER BY birth_date DESC
+        ) AS age_rank
+    FROM employees
+) ranked_employees
+WHERE age_rank = 1
+ORDER BY team ASC;
+
+------------------------------------------------------------------------------------------------------------------------
 --https://www.codewars.com/kata/580918e24a85b05ad000010c
 
 SELECT
