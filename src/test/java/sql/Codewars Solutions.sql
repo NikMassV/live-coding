@@ -1,4 +1,29 @@
 ------------------------------------------------------------------------------------------------------------------------
+--https://www.codewars.com/kata/677c44eb274bbf4664cbaf58/train/sql
+The Great Data Entry Blame Game
+
+WITH error_records AS (
+    SELECT
+        c.entered_by AS specialist_id
+    FROM certifications c
+    JOIN employees e ON c.employee_id = e.id
+    WHERE levenshtein(e.name, c.cert_name) BETWEEN 1 AND 3
+)
+SELECT
+    specialist_id,
+    COUNT(*) AS error_count,
+    TO_CHAR(
+        ROUND(
+            (COUNT(*) * 100.0 / SUM(COUNT(*)) OVER ()),
+            2
+        ),
+        'FM999.00'
+    ) AS error_percentage
+FROM error_records
+GROUP BY specialist_id
+ORDER BY error_count DESC, specialist_id;
+
+------------------------------------------------------------------------------------------------------------------------
 --https://www.codewars.com/kata/6492b17a7c08e4005790053e/train/sql
 Youngest Team Members
 
