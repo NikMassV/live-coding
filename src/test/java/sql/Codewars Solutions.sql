@@ -1,4 +1,17 @@
 ------------------------------------------------------------------------------------------------------------------------
+--https://www.codewars.com/kata/5ab828bcedbcfc65ea000099/train/sql
+SQL with Pokemon: Damage Multipliers
+
+SELECT
+    p.pokemon_name,
+    p.str * m.multiplier AS modifiedStrength,
+    m.element
+FROM pokemon p
+JOIN multipliers m ON p.element_id = m.id
+WHERE p.str * m.multiplier >= 40
+ORDER BY modifiedStrength DESC, p.pokemon_name;
+
+------------------------------------------------------------------------------------------------------------------------
 --https://www.codewars.com/kata/677c44eb274bbf4664cbaf58/train/sql
 The Great Data Entry Blame Game
 
