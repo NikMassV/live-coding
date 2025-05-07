@@ -1,4 +1,21 @@
 ------------------------------------------------------------------------------------------------------------------------
+--https://www.codewars.com/kata/677854ee17c7b76184c1471c/train/sql
+Identifying Mutual Likes in a Dating App
+
+SELECT DISTINCT
+    LEAST(ul1.liker_id, ul1.liked_id) AS user1_id,
+    GREATEST(ul1.liker_id, ul1.liked_id) AS user2_id
+FROM
+    user_likes ul1
+WHERE EXISTS (
+    SELECT 1
+    FROM user_likes ul2
+    WHERE ul2.liker_id = ul1.liked_id
+    AND ul2.liked_id = ul1.liker_id
+)
+ORDER BY user1_id, user2_id;
+
+------------------------------------------------------------------------------------------------------------------------
 --https://www.codewars.com/kata/5ab828bcedbcfc65ea000099/train/sql
 SQL with Pokemon: Damage Multipliers
 
