@@ -1,4 +1,27 @@
 ------------------------------------------------------------------------------------------------------------------------
+--https://www.codewars.com/kata/677c44eb274bbf4664cbaf58/train/sql
+The Great Data Entry Blame Game
+
+WITH typo_errors AS (
+  SELECT
+    c.entered_by AS specialist_id,
+    COUNT(*) AS error_count
+  FROM certifications c
+  JOIN employees e ON c.employee_id = e.id
+  WHERE levenshtein(e.name, c.cert_name) BETWEEN 1 AND 3
+  GROUP BY c.entered_by
+),
+total_errors AS (
+  SELECT SUM(error_count) AS total FROM typo_errors
+)
+SELECT
+  t.specialist_id,
+  t.error_count,
+  ROUND((t.error_count::numeric / te.total) * 100, 2)::varchar AS error_percentage
+FROM typo_errors t, total_errors te
+ORDER BY t.error_count DESC, t.specialist_id;
+
+------------------------------------------------------------------------------------------------------------------------
 --https://www.codewars.com/kata/677854ee17c7b76184c1471c/train/sql
 Identifying Mutual Likes in a Dating App
 
