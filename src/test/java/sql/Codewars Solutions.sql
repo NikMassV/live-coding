@@ -1,4 +1,18 @@
 ------------------------------------------------------------------------------------------------------------------------
+--https://www.codewars.com/kata/67741444c77444b19e8b5223/train/sql
+Finding Products Matching All Selected Tags
+
+SELECT product_id
+FROM (
+    SELECT DISTINCT product_id, tag
+    FROM product_tags
+    WHERE tag IN ('Electronics', 'Gadgets')
+) t
+GROUP BY product_id
+HAVING COUNT(DISTINCT tag) = 2
+ORDER BY product_id DESC;
+
+------------------------------------------------------------------------------------------------------------------------
 --https://www.codewars.com/kata/677c44eb274bbf4664cbaf58/train/sql
 The Great Data Entry Blame Game
 
