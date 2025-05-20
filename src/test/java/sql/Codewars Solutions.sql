@@ -8,7 +8,7 @@ SELECT
 FROM people p
 LEFT JOIN visits v ON p.id = v.person_id
 GROUP BY p.name
-ORDER BY COUNT(v.country_id) DESC, p.name ASC
+ORDER BY countries_visited DESC, p.name ASC
 
 ------------------------------------------------------------------------------------------------------------------------
 --https://www.codewars.com/kata/67741444c77444b19e8b5223/train/sql
