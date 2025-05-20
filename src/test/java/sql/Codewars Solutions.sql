@@ -1,4 +1,16 @@
 ------------------------------------------------------------------------------------------------------------------------
+--https://www.codewars.com/kata/66c71c893759d440748154f8/train/sql
+Number of countries visited
+
+SELECT
+  p.name AS name,
+  COUNT(DISTINCT v.country_id) AS countries_visited
+FROM people p
+LEFT JOIN visits v ON p.id = v.person_id
+GROUP BY p.name
+ORDER BY COUNT(v.country_id) DESC, p.name ASC
+
+------------------------------------------------------------------------------------------------------------------------
 --https://www.codewars.com/kata/67741444c77444b19e8b5223/train/sql
 Finding Products Matching All Selected Tags
 
