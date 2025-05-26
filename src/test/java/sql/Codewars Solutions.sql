@@ -1,4 +1,24 @@
 ------------------------------------------------------------------------------------------------------------------------
+--https://www.codewars.com/kata/66acd927c487bb5f867a38c5/train/sql
+Categorize and Count Job Applications Based on Status
+
+WITH status_groups AS (
+    SELECT
+        CASE
+            WHEN application_status <= 5 THEN 'Rejected'
+            ELSE 'Approved'
+        END AS status_group
+    FROM applications
+)
+SELECT
+    sg.status_group,
+    COUNT(a.status_group) AS application_num
+FROM (VALUES ('Rejected'), ('Approved')) AS sg(status_group)
+LEFT JOIN status_groups a ON sg.status_group = a.status_group
+GROUP BY sg.status_group
+ORDER BY CASE sg.status_group WHEN 'Rejected' THEN 1 WHEN 'Approved' THEN 2 END
+
+------------------------------------------------------------------------------------------------------------------------
 --https://www.codewars.com/kata/66c71c893759d440748154f8/train/sql
 Number of countries visited
 
