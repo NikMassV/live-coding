@@ -1,4 +1,20 @@
 ------------------------------------------------------------------------------------------------------------------------
+--https://www.codewars.com/kata/66a7a26b47cb2b55796f0d81/train/sql
+Counting Interview Failures Without Using COUNT()
+
+SELECT
+  failure_reason,
+  MAX(row_num) AS cnt
+FROM (
+  SELECT
+    failure_reason,
+    ROW_NUMBER() OVER (PARTITION BY failure_reason ORDER BY candidate_name) AS row_num
+  FROM interview_failures
+) t
+GROUP BY failure_reason
+ORDER BY cnt DESC, failure_reason ASC
+
+------------------------------------------------------------------------------------------------------------------------
 --https://www.codewars.com/kata/66acd927c487bb5f867a38c5/train/sql
 Categorize and Count Job Applications Based on Status
 
