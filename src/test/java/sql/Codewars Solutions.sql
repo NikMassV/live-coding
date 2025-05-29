@@ -1,4 +1,21 @@
 ------------------------------------------------------------------------------------------------------------------------
+--https://www.codewars.com/kata/6776bee98d5e887886da23e9/train/sql
+Tracking Active Bookings Over Time
+
+SELECT
+  d.booking_date,
+  SUM(CASE
+      WHEN b.booking_date <= d.booking_date
+      AND b.course_start_date >= d.booking_date
+      THEN 1 ELSE 0
+    END
+  ) AS active_bookings
+FROM (SELECT DISTINCT booking_date FROM course_bookings) d
+CROSS JOIN course_bookings b
+GROUP BY d.booking_date
+ORDER BY d.booking_date
+
+------------------------------------------------------------------------------------------------------------------------
 --https://www.codewars.com/kata/66a7a26b47cb2b55796f0d81/train/sql
 Counting Interview Failures Without Using COUNT()
 
