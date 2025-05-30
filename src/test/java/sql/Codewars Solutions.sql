@@ -1,4 +1,25 @@
 ------------------------------------------------------------------------------------------------------------------------
+--https://www.codewars.com/kata/67794624346643af4622a25d/train/sql
+Building a User Leaderboard with Engagement Metrics
+
+SELECT
+  RANK() OVER (
+    ORDER BY
+      (u.likes_count * 1 + u.comments_count * 2 + u.shares_count * 3 +
+       CASE WHEN ga.github_handle IS NOT NULL THEN 50 ELSE 0 END) DESC,
+      u.date_joined ASC,
+      u.username ASC
+  ) AS rank,
+  u.username,
+  (u.likes_count * 1 + u.comments_count * 2 + u.shares_count * 3 +
+   CASE WHEN ga.github_handle IS NOT NULL THEN 50 ELSE 0 END) AS engagement_points,
+  u.date_joined,
+  ga.github_handle
+FROM users u
+LEFT JOIN github_accounts ga ON u.id = ga.user_id
+ORDER BY rank LIMIT 10
+
+------------------------------------------------------------------------------------------------------------------------
 --https://www.codewars.com/kata/6776bee98d5e887886da23e9/train/sql
 Tracking Active Bookings Over Time
 
