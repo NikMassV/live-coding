@@ -1,4 +1,18 @@
 ------------------------------------------------------------------------------------------------------------------------
+--https://www.codewars.com/kata/6775ab40f938ecb139c60d62/train/sql
+Finding Products Matching All Selected Tags: Parameterized Version
+
+PREPARE find_products_by_tags (text[]) AS
+SELECT product_id
+FROM product_tags
+WHERE tag = ANY($1)
+GROUP BY product_id
+HAVING COUNT(DISTINCT tag) = (
+  SELECT COUNT(DISTINCT t) FROM unnest($1) AS t
+)
+ORDER BY product_id DESC
+
+------------------------------------------------------------------------------------------------------------------------
 --https://www.codewars.com/kata/67794624346643af4622a25d/train/sql
 Building a User Leaderboard with Engagement Metrics
 
