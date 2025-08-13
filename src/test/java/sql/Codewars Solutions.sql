@@ -1,4 +1,36 @@
 ------------------------------------------------------------------------------------------------------------------------
+--https://www.codewars.com/kata/64d499812df37400210180e4/solutions/sql
+Six Consecutive 'No' Outcomes in Customer Calls
+
+SELECT
+    user_id,
+    TO_CHAR(date_of_call, 'YYYY-MM-DD HH24:MI:SS') AS date_of_call
+FROM (
+    SELECT
+        user_id,
+        date_of_call,
+        outcome,
+        -- Check if the last 5 calls before this one were also 'No'
+        CASE
+            WHEN outcome = 'No'
+             AND LAG(outcome, 1) OVER w = 'No'
+             AND LAG(outcome, 2) OVER w = 'No'
+             AND LAG(outcome, 3) OVER w = 'No'
+             AND LAG(outcome, 4) OVER w = 'No'
+             AND LAG(outcome, 5) OVER w = 'No'
+             AND (
+                  -- Ensure it is exactly the 6th (previous call was 'Yes' or doesn't exist)
+                  LAG(outcome, 6) OVER w IS DISTINCT FROM 'No'
+             )
+            THEN 1 ELSE 0
+        END AS is_sixth
+    FROM calls
+    WINDOW w AS (PARTITION BY user_id ORDER BY date_of_call)
+) t
+WHERE is_sixth = 1
+ORDER BY user_id, date_of_call;
+
+------------------------------------------------------------------------------------------------------------------------
 --https://www.codewars.com/kata/6775ab40f938ecb139c60d62/train/sql
 Finding Products Matching All Selected Tags: Parameterized Version
 
