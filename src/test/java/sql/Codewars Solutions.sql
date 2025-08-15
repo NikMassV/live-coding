@@ -1,4 +1,20 @@
 ------------------------------------------------------------------------------------------------------------------------
+--https://www.codewars.com/kata/686cf5d8ebcff30d8b051b06/train/sql
+One House, Many Claims: Detect Duplicate Address Applications
+
+SELECT
+  CONCAT(
+    COUNT(*) || ' applications (applicant_ids: ',
+    string_agg(applicant_id::text, ', ' ORDER BY applicant_id),
+    ') already filed at ',
+    house_no, ' ', street_name
+  ) AS audit_note
+FROM energy_rebate_applications
+GROUP BY house_no, street_name
+HAVING COUNT(*) > 1
+ORDER BY COUNT(*) DESC, street_name ASC, house_no ASC;
+
+------------------------------------------------------------------------------------------------------------------------
 --https://www.codewars.com/kata/64d499812df37400210180e4/solutions/sql
 Six Consecutive 'No' Outcomes in Customer Calls
 
