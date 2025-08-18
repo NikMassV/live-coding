@@ -1,4 +1,20 @@
 ------------------------------------------------------------------------------------------------------------------------
+--https://www.codewars.com/kata/5816a3ecf54413a113000074/train/sql
+Conditional Count
+
+SELECT
+  EXTRACT(MONTH FROM payment_date)::float AS month,
+  COUNT(*) AS total_count,
+  SUM(amount)::numeric(10,2) AS total_amount,
+  COUNT(*) FILTER (WHERE staff_id = 1) AS mike_count,
+  SUM(amount) FILTER (WHERE staff_id = 1)::numeric(10,2) AS mike_amount,
+  COUNT(*) FILTER (WHERE staff_id = 2) AS jon_count,
+  SUM(amount) FILTER (WHERE staff_id = 2)::numeric(10,2) AS jon_amount
+FROM payment
+GROUP BY month
+ORDER BY month;
+
+------------------------------------------------------------------------------------------------------------------------
 --https://www.codewars.com/kata/686cf5d8ebcff30d8b051b06/train/sql
 One House, Many Claims: Detect Duplicate Address Applications
 
