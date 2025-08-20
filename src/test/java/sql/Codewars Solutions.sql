@@ -1,4 +1,35 @@
 ------------------------------------------------------------------------------------------------------------------------
+--https://www.codewars.com/kata/66aa0b0a9936648e423dd7ee/train/sql
+Runner Results with Position-Based Competitor Info
+
+SELECT
+  r.name AS runner_name,
+  ru.run_id,
+  ru.position,
+  ru.race_id,
+  (
+    CASE
+      WHEN ru.position = 1 THEN
+        (SELECT r2.name || ' (' || ru2.runner_id || ')'
+         FROM runs ru2
+         JOIN runners r2 ON ru2.runner_id = r2.runner_id
+         WHERE ru2.race_id = ru.race_id AND ru2.position = 2
+         LIMIT 1)
+      ELSE
+        (SELECT r3.name || ' (' || ru3.runner_id || ')'
+         FROM runs ru3
+         JOIN runners r3 ON ru3.runner_id = r3.runner_id
+         WHERE ru3.race_id = ru.race_id AND ru3.position = 1
+         LIMIT 1)
+    END
+  ) AS "win/second"
+FROM runs ru
+JOIN runners r ON ru.runner_id = r.runner_id
+JOIN races ra ON ru.race_id = ra.race_id
+WHERE ru.runner_id = 1
+ORDER BY ra.date ASC;
+
+------------------------------------------------------------------------------------------------------------------------
 --https://www.codewars.com/kata/5816a3ecf54413a113000074/train/sql
 Conditional Count
 
