@@ -1,4 +1,13 @@
 ------------------------------------------------------------------------------------------------------------------------
+--https://www.codewars.com/kata/5a90f6d457c5624ecc000012/train/sql
+Next smaller pronic
+
+SELECT n,
+  (ROUND(SQRT(n)))::BIGINT * ((ROUND(SQRT(n))-1))::BIGINT
+  AS res
+FROM pronic
+
+------------------------------------------------------------------------------------------------------------------------
 --https://www.codewars.com/kata/66aa0b0a9936648e423dd7ee/train/sql
 Runner Results with Position-Based Competitor Info
 
