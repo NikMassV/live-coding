@@ -1,4 +1,39 @@
 ------------------------------------------------------------------------------------------------------------------------
+--https://www.codewars.com/kata/66b09bedf5ca866d7ffafc8f/train/sql
+Daily Hospital Admissions and Discharges Report
+
+WITH combined AS (
+  SELECT
+    to_char(join_date, 'YYYY-MM-DD') AS date,
+    1 AS joins,
+    0 AS exits
+  FROM admissions
+  UNION ALL
+  SELECT
+    to_char(exit_date, 'YYYY-MM-DD') AS date,
+    0 AS joins,
+    1 AS exits
+  FROM exits
+),
+daily_summary AS (
+  SELECT
+    date,
+    SUM(joins) AS joins,
+    SUM(exits) AS exits,
+    SUM(joins) - SUM(exits) AS net
+  FROM combined
+  GROUP BY date
+)
+SELECT
+  date,
+  joins,
+  exits,
+  net,
+  SUM(net) OVER (ORDER BY date)::int AS cumulative_net
+FROM daily_summary
+ORDER BY date ASC;
+
+------------------------------------------------------------------------------------------------------------------------
 --https://www.codewars.com/kata/5a90f6d457c5624ecc000012/train/sql
 Next smaller pronic
 
