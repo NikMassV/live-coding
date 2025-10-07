@@ -1,4 +1,20 @@
 ------------------------------------------------------------------------------------------------------------------------
+--https://www.codewars.com/kata/6614e1e887f83d3ad409571e/train/sql
+Employee Weekend Work: Counting Unique Weekends and Total Days Worked
+
+SELECT
+    employee_id,
+    COUNT(DISTINCT DATE_TRUNC('week', attendance_date)) AS weekends_worked,
+    COUNT(*) AS total_weekend_days_worked
+FROM employee_attendance
+WHERE EXTRACT(ISODOW FROM attendance_date) IN (6, 7)
+  AND EXTRACT(YEAR FROM attendance_date) = 2023
+GROUP BY employee_id
+ORDER BY weekends_worked DESC,
+         total_weekend_days_worked DESC,
+         employee_id DESC;
+
+------------------------------------------------------------------------------------------------------------------------
 --https://www.codewars.com/kata/66b09bedf5ca866d7ffafc8f/train/sql
 Daily Hospital Admissions and Discharges Report
 
